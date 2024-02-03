@@ -1,0 +1,48 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+
+    char tracker = 'a',input;
+
+    bool upper = false;
+
+    int row = 1, length;
+
+    cout << "Please enter a lower-case letter: " << endl;
+    cin >> input;
+
+    length = ((int) input - (int) 'a') + 1;
+    
+    while (tracker <= input) {
+
+
+        for (int spaces = length-1; spaces > 0; spaces--){
+            cout << " ";
+        }
+        if (upper) {
+            for (int x = 0; x < row; x++) {
+                cout << (char)(tracker - 32);
+                upper = false;
+            }
+        }
+        else {
+            for (int x = 0; x < row; x++){
+                cout << tracker;
+                upper = true;
+            };
+        }
+
+        for (int spaces = length-1; spaces > 0; spaces--){
+            cout << " ";
+        }
+
+        cout << endl;
+
+        row += 2;
+        tracker++;
+        length--;
+    }
+
+}
