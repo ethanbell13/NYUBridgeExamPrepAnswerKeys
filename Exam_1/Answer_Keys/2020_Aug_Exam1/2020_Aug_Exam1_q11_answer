@@ -1,0 +1,41 @@
+
+#include <iostream>
+using namespace std;
+
+
+int main() {
+
+    int size;
+
+    cout << "Please enter a positive integer: ";
+    cin >> size;
+
+    // rows
+    for (int rows = 0; rows < size; rows++) {
+        //columns
+        for (int col = 0; col < size; col++) {
+
+            if (rows % 2 == 0) {
+                if (col % 2 == 0) {
+                    cout << "X";
+                } else {
+                    cout << "O";
+                }
+            }
+            else {
+                if (col % 2 == 0) {
+                    cout << "O";
+                } else {
+                    cout << "X";
+                }
+            }
+        }
+
+        //Break the line
+        cout << endl;
+    }
+
+
+}
+
+
