@@ -1,0 +1,53 @@
+
+#include <iostream>
+using namespace std;
+
+int main() {
+
+    int input = 1, even_digit = 0, odd_digit = 0, more_even = 0;
+
+    cout << "Please enter a sequence of positive integers, each one in a seperate line. End your sequence by typing -1: ";
+
+    while (input > 0){
+        cin >> input;
+        even_digit = 0;
+        odd_digit = 0;
+
+
+        int tracker = input;
+
+        // determining if loop needs to quit
+        if (input == -1) {
+            break;
+        }
+        else {
+             while (tracker > 0) {
+
+                 if ((tracker % 10) % 2 == 0) {
+
+
+                     even_digit++;
+                     tracker = tracker / 10;
+
+                 }
+                 else {
+
+                     odd_digit++;
+                     tracker = tracker / 10;
+                 }
+
+             }
+
+             if (even_digit > odd_digit) {
+
+                 more_even++;
+             }
+
+        }
+
+
+
+
+    }
+    cout << "You entered " << more_even << " more-even numbers";
+}
