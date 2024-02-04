@@ -17,7 +17,7 @@
 
 	6.	c
 
-	7.	d
+	7.	d (possibly e there is an open issue for this question, where you can provide your opinion abot which answer is correct.)
 
 	8.
 		a: T
@@ -29,7 +29,7 @@
 		g: F
 		h: T
 		i: T
-		j: F
+		j: T
 
 	9.	B
 	
