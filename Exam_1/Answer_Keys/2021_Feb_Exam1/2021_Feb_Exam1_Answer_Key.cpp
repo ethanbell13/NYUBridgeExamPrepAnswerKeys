@@ -17,7 +17,7 @@
 
 	6.	c
 
-	7.	d (possibly e there is an open issue for this question, where you can provide your opinion abot which answer is correct.)
+	7.	d 
 
 	8.
 		a: T
