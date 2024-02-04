@@ -1,0 +1,84 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+
+    //these are comprehensive trackers
+    int three_digit = 0,  four_digit = 0, five_digit= 0, six_digit= 0,
+            seven_digit= 0,more_odd= 0, equal_digit= 0;
+    // reset these each loop
+    int input, odd_digit= 0, even_digit= 0;
+    bool keep_going = true;
+
+    cout << "Please enter a sequence of numbers (with at least 3-digits and at most 7-digits)" <<
+    ", each one in a seperate line. End your sequence by typing -1: " << endl;
+
+    while (keep_going) {
+        cin >> input;
+        odd_digit = 0;
+        even_digit = 0;
+        int digit_tracker = 0;
+
+        if (input == -1) {
+            break;
+        } else {
+            while (input > 0) {
+
+                int digit = (input % 10) ;
+//                cout << digit << endl;
+
+                if ((input % 10) % 2 == 0) {
+//                    cout << "even-digit" << endl;
+                    even_digit++;
+                }
+                else {
+//                    cout << "odd-digit" << endl;
+                    odd_digit++;
+                }
+
+                input = input / 10;
+                digit_tracker++;
+            }
+
+            switch (digit_tracker) {
+                case (3) :
+                    three_digit++;
+                    break;
+                case (4):
+                    four_digit++;
+                    break;
+                case (5):
+                    five_digit++;
+                    break;
+                case(6):
+                    six_digit++;
+                    break;
+                case (7):
+                    seven_digit++;
+                    break;
+                default:
+                    break;
+            }
+
+            if (odd_digit > even_digit) {
+                more_odd++;
+            }
+            else if (odd_digit == even_digit) {
+                equal_digit++;
+            }
+
+
+        }
+    }
+
+
+    cout << "Total count of numbers in the 3-digit Numbers Group: " << three_digit << endl;
+    cout << "Total count of numbers in the 4-digit Numbers Group: " << four_digit << endl;
+    cout << "Total count of numbers in the 5-digit Numbers Group: " << five_digit << endl;
+    cout << "Total count of numbers in the 6-digit Numbers Group: " << six_digit << endl;
+    cout << "Total count of numbers in the 7-digit Numbers Group: " << seven_digit << endl;
+    cout << "Total count of numbers in the More Odd-digits Group: " << more_odd << endl;
+    cout << "Total count of numbers in the Equal-digits Group: " << equal_digit << endl;
+
+}
