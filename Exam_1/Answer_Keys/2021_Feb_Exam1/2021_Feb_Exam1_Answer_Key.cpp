@@ -1,7 +1,7 @@
 /*	2021 Extended Bridge Exam 1
 	1.
-		a: 211
-		b: 01000100
+		a: 2110
+		b: -68
 	
 	2.	d
 
