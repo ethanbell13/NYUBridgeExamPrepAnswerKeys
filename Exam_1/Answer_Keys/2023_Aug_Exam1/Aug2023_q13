@@ -1,0 +1,68 @@
+
+#include <iostream>
+
+using namespace std;
+
+int main() {
+
+    int length;
+
+    int top_spaces, top_star, bottom_spaces, bottom_star;
+
+    cout << "Please enter a positive integer: " <<endl;
+    cin >> length;
+
+    top_spaces = length;
+    top_star = 1;
+
+    bottom_spaces = 1;
+    bottom_star = 2*length-1;
+
+
+    // top rows
+    for (int row = 0; row < length; row++){
+
+        for (int top_left_spaces = top_spaces; top_left_spaces > 0; top_left_spaces--){
+            cout << " ";
+        }
+        for (int t_stars = 0; t_stars < top_star; t_stars++){
+            cout << "*";
+        }
+        for (int top_right_spaces = top_spaces; top_right_spaces > 0; top_right_spaces--){
+            cout << " ";
+        }
+
+        cout<< endl;
+        top_spaces--;
+        top_star +=2;
+
+    }
+
+    //middle star row
+    for (int middle_star = 0; middle_star < 2*length+1; middle_star++){
+        cout << "*";
+    }
+    cout  << endl;
+
+    //bottom rows
+    for (int row = 0; row < length; row++){
+
+        //left spaces
+        for (int left_bottom_spaces = 0; left_bottom_spaces < bottom_spaces; left_bottom_spaces++ ) {
+            cout << " ";
+        }
+        //stars
+        for (int b_stars =  bottom_star; b_stars > 0; b_stars--){
+            cout << "*";
+        }
+        for (int right_bottom_spaces = 0; right_bottom_spaces < bottom_spaces; right_bottom_spaces++ ) {
+            cout << " ";
+        }
+
+        //right spaces
+
+        cout << endl;
+        bottom_star -= 2;
+        bottom_spaces++;
+    }
+}
