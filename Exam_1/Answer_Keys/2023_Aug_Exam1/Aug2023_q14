@@ -1,0 +1,48 @@
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+
+    //these will be updated each time
+    int input;
+
+    //these are comprehensive trackers
+    int total_perfect_square = 0;
+    int total_perfect_numbers = 0;
+
+    cout << "Please enter a sequence of integers (with at least 1-digit" <<
+    " and at most 9-digits), each one in a seperate line. End your sequence by typing -1: "
+    << endl;
+
+    while (true) {
+        cin >> input;
+        int divisor_sum = 0;
+
+        if (input == -1){
+            break;
+        }
+
+        for (int divisor = 1; divisor < input; divisor++) {
+            if (input % divisor == 0){
+                if (sqrt((double)input) == divisor) {
+                    total_perfect_square++;
+                }
+                else {
+                    divisor_sum += divisor;
+                }
+            }
+        }
+
+        if (divisor_sum == input) {
+            total_perfect_numbers++;
+        }
+
+    }
+
+
+    cout << "Total count Perfect Squares in the given sequence: " << total_perfect_square << endl;
+    cout << "Total count Perfect Numbers in the given sequence: " << total_perfect_numbers << endl;
+
+}
