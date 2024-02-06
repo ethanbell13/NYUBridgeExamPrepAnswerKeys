@@ -1,0 +1,111 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+
+    int length;
+
+    int top_spaces, top_middle_spaces = 1;
+
+    int bottom_spaces = 1, bottom_middle_spaces;
+
+    char output = 'a';
+
+    cout << "Please enter a length: " << endl;
+
+    cin >> length;
+
+    top_spaces = length - 1;
+
+
+
+
+    //top half of the diamond
+    for (int top_row = 0; top_row < length; top_row++) {
+
+        if (top_row == 0) {
+            for (int top_left_spaces = 0; top_left_spaces < top_spaces; top_left_spaces++) {
+                cout << " ";
+            }
+            cout << output;
+            for (int top_left_spaces = 0; top_left_spaces < top_spaces; top_left_spaces++) {
+                cout << " ";
+            }
+            top_middle_spaces -= 2;
+
+        }
+        else {
+
+            //left spaces
+            for (int top_left_spaces = 0; top_left_spaces < top_spaces; top_left_spaces++) {
+                cout << " ";
+            }
+            cout << output;
+            //middle spaces
+            for (int top_mid_spaces = 0; top_mid_spaces < top_middle_spaces; top_mid_spaces++) {
+                cout << " ";
+            }
+
+            cout << output;
+            //right spaces
+            for (int top_right_spaces = 0; top_right_spaces < top_spaces; top_right_spaces++) {
+                cout << " ";
+            }
+        }
+
+        cout << endl;
+        top_spaces--;
+        top_middle_spaces += 2;
+        output++;
+
+    }
+
+    bottom_middle_spaces = top_middle_spaces-4;
+
+
+    //bottom half of the diamond
+    for (int top_row = 1; top_row < length; top_row++) {
+
+        if (top_row == length - 1) {
+            for (int bot_left_spaces = 0; bot_left_spaces < bottom_spaces; bot_left_spaces++) {
+                cout << " ";
+            }
+
+            cout << output;
+
+            for (int bot_left_spaces = 0; bot_left_spaces < bottom_spaces; bot_left_spaces++) {
+                cout << " ";
+            }
+
+        }
+        else {
+
+            //bottom left spaces
+            for (int bot_left_spaces = 0; bot_left_spaces < bottom_spaces; bot_left_spaces++) {
+                cout << " ";
+            }
+
+            cout << output;
+
+            //bottom middle spaces
+            for (int bot_mid_space = 0; bot_mid_space < bottom_middle_spaces; bot_mid_space++) {
+                cout << " ";
+            }
+
+            cout << output;
+
+            for (int bot_right_spaces = 0; bot_right_spaces < bottom_spaces; bot_right_spaces++) {
+                cout << " ";
+            }
+        }
+
+
+
+        cout << endl;
+        output++;
+        bottom_middle_spaces -= 2;
+        bottom_spaces++;
+    }
+
+
+}
