@@ -1,0 +1,43 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int length;
+
+    cout << "Please enter a length: " << endl;
+
+    cin >> length;
+
+    //rows
+    for (int rows = 0; rows < length; rows++) {
+        if (rows == 0 || rows == length-1) {
+            for (int output = 0; output < length; output++){
+                cout << "#";
+            }
+        }
+        else{
+
+            //columns
+            for (int col = 0; col < length; col ++){
+                if (col==0 || col == length - 1) {
+                    cout << "#";
+                }
+                else{
+                    if (rows == col) {
+                        cout << "$";
+                    }
+                    else if (col == (length - rows - 1)){
+                        cout << "$";
+
+                    }
+                    else {
+                        cout << " ";
+                    }
+                }
+            }
+
+        }
+        cout << endl;
+    }
+}
