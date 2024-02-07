@@ -1,0 +1,34 @@
+
+
+#include <iostream>
+
+using namespace std;
+
+int main() {
+
+    int length, stars, spaces;
+    cout << "Please enter a positive integer: " <<endl;
+
+    cin >> length;
+    stars = 1;
+    spaces = 2*length-1;
+
+    //rows
+    for (int rows = 0; rows < 2*length; rows++ ){
+
+        //spaces
+        for (int sp = 0; sp < spaces; sp++) {
+            cout << "1";
+        }
+
+        //stars
+        for (int st = 0; st < stars; st++) {
+            cout << "*";
+
+        }
+        cout << endl;
+        stars++;
+        spaces--;
+    }
+
+}
