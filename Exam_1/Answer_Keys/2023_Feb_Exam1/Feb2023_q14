@@ -1,0 +1,59 @@
+
+
+#include <iostream>
+using namespace std;
+
+int main() {
+
+    // these will be updated each loop
+    int input, digit_subtotal;
+
+
+    //these will not be updated each time
+    int group1_total = 0, group2_total = 0, group3_total = 0, group4_total = 0;
+
+    cout << "Please enter a sequence of numbers (with at least 1-digit "
+         << "and at most 8-digits), each one in a seperate line." <<
+         "End your sequence by typing -1: ";
+
+
+    while (true) {
+        cin >> input;
+        int temp_input = input;
+        int temp_total = 0;
+
+        if (input == -1) {
+            break;
+        }
+        else {
+
+            while (temp_input > 0){
+
+               temp_total = temp_total + (temp_input % 10);
+               temp_input = temp_input / 10;
+
+            }
+
+            if (temp_total >= 30) {
+                group4_total++;
+            }
+            else if (temp_total >= 20) {
+                group3_total++;
+            }
+            else if (temp_total >= 10) {
+                group2_total++;
+            }
+            else{
+                group1_total++;
+            }
+        }
+    }
+
+
+    cout << "Total count of numbers in Group 1: " << group1_total << endl;
+    cout << "Total count of numbers in Group 2: " << group2_total << endl;
+    cout << "Total count of numbers in Group 3: " << group3_total << endl;
+    cout << "Total count of numbers in Group 4: " << group4_total << endl;
+
+
+}
