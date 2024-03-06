@@ -8,16 +8,12 @@ void printArray(int arr[], int arrSize) {
 }
 
 int* firstPosIntsArr(int n, int* arrSize) {
-  int pos_int = 0, idx = 0;
+  int pos_int = 1, idx = 0;
   int* arr = new int[n];
   *arrSize = n;
 
-  while (n > 0) {
-    arr[idx] = pos_int;
-    pos_int += 2;
-    idx++;
-    n--;
-  }
+  for (int idx = 0; idx < n; idx++)
+    arr[idx] = pos_int++;
 
   return arr;
 }
