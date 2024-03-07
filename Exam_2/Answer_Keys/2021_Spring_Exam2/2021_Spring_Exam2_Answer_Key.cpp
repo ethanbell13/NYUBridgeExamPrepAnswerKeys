@@ -91,7 +91,7 @@
     within the scope of first10Squares(). Once the function does its work, the arr[10] is wiped from the stack,
     but the global scope still needs to reference it. The global scope is instead referencing the address of a
     static array that no longer exists, effectively accessing arbitrary memory when calling the non-existent
-    array's indexes.
+    array's indices.
     
     The line that must be changed is the first line after int* first10Squares() {
     int arr[10]; must become int* arr = new int[10];
