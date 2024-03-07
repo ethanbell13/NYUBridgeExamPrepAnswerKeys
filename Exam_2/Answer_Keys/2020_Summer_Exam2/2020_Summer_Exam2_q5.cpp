@@ -1,25 +1,26 @@
 #include <iostream>
-#include <vector>
 
 double findMedian(int arr[], int n) {
   int mid = (n + 1) / 2;
 
-  std::vector<int> occurrence_vec;
+  int* occurrence_arr = new int[n + 1];
   for (int idx = 0; idx <= n; idx++)
-    occurrence_vec.push_back(0);
+    occurrence_arr[idx] = 0;
   
   for (int idx = 0; idx < n; idx++)
-    occurrence_vec[arr[idx]]++;
+    occurrence_arr[arr[idx]]++;
   
   double median;
   double cnt = 0;
-  for (double idx = 0; idx <= n; idx++) {
-    cnt += occurrence_vec[idx];
+  for (int idx = 0; idx <= n; idx++) {
+    cnt += occurrence_arr[idx];
     if (cnt >= mid) {
       median = idx;
       break;
     }
   }
+
+  delete [] occurrence_arr;
 
   return median;
 }
