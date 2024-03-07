@@ -48,7 +48,7 @@ int main() {
   <<"separated by a space.\n"
   <<"To indicate the end of the input, enter -1 as a student ID:"<<std::endl;
 
-  int highest_grade = 0, num_inputs = 0;
+  int highest_grade = 0;
   int student_id, grade;
   std::vector<int> student_ids, grades;
   std::string input;
