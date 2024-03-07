@@ -9,7 +9,7 @@
 
     Question 2 of 2:
     Ignoring constant time complexity
-    The reverseArray function runs a total of n/2 times each call
+    The reverseArray function runs n/2 times
     func2 calls the reverseArray function log2(n) + 1 times
 
     T(n) = Theta((log2(n) + 1) * (n / 2)) = Theta(nlog2(n))
