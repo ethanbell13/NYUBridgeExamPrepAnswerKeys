@@ -71,7 +71,7 @@
     E[X] = 1*(1/9) + 2*(1/27)*(1/9) + 3*(1/27)*(1/27)*(1/9) + 4*(1/27)*(1/27)*(1/27)*(1/36)
 
     4.
-    a. Analyze the funtime of func:
+    a. Analyze the runtime of func:
     Syntax: log_2(x) = lg(x)
     Ignoring constant runtime elements
 
