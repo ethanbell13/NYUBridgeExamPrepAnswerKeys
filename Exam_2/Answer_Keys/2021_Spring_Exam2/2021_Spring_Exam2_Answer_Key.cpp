@@ -80,7 +80,7 @@
     The inner for loop runs log(n) times
     The for loop runs (lg(log(n))+1)(log(n)) times
 
-    T(n) = Theta((lg(log(n))+1)(log(n))) = Theta(log(n)lg(log(n)) + log(n)) = Theta(log(n))
+    T(n) = Theta((lg(log(n))+1)(log(n))) = Theta(log(n)lg(log(n)) + log(n)) = Theta(log(n)lg(log(n)))
 
     b. Fixing Ben-El's code
     The code is faulty because first10Squares returns the address of a static array that only existed
