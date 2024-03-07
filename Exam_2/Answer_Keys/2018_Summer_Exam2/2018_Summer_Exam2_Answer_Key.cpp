@@ -12,7 +12,7 @@
     The reverseArray function runs a total of n/2 times each call
     func2 calls the reverseArray function log2(n) times
 
-    T(n) = Theta(log2(n) * (n / 2)) = Theta(n)
+    T(n) = Theta(log2(n) * (n / 2)) = Theta(nlog2(n))
 
     2.
     Proof: by induction on n
