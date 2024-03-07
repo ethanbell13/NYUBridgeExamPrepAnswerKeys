@@ -74,6 +74,6 @@
         inner loop runs 2^{n-1} times
         total loop runs n(2^{n-1}) times
         Theta(n(2^{n-1})) = Theta(2^n)
-    T_func1 = Theta(n) + Theta(2^n)
-    T_func1 = Theta(2^n)
+    T_func2 = Theta(n) + Theta(2^n)
+    T_func2 = Theta(2^n)
 */
