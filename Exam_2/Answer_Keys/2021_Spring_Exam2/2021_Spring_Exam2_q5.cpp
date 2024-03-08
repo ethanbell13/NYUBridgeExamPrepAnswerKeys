@@ -26,12 +26,6 @@ void split_input(std::string input, std::vector<int>& vec1, std::vector<int>& ve
   vec2.push_back(word2);
 }
 
-void print_vec(std::vector<int> vec) {
-  for (int elem:vec)
-    std::cout<<elem<<" ";
-  std::cout<<std::endl;
-}
-
 void print_results(std::vector<int> student_ids, std::vector<int> grades, int highest_grade) {
   std::cout<<"The highest grade is "<<highest_grade<<std::endl;
   std::cout<<"The students with the grade "<<highest_grade<<" are:";
