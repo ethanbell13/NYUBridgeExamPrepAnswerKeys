@@ -55,25 +55,19 @@
     E[X] = 73/36
 
     4.
+    Syntax: log_2(x) = lg(x)
     Ignoring constant time operations
     
     func1:
     first for loop runs n-1 times -> Theta(n)
-    second, nested for loop:
-        outer loop runs n times
-        inner loop runs (2n - 1) times
-        total loop runs n(2n-1)
-        Theta(n(2n-1)) = Theta(n^2)
-    T_func1 = Theta(n) + Theta(n^2)
-    T_func1 = Theta(n^2)
+    second for loop:
+        1 + 3 + 5 + ... + (2n - 1) = n^2 -> Theta(n^2)
+    T_func1 = Theta(n + n^2) = Theta(n^2)
 
     func2:
     first for loop runs n-1 times -> Theta(n)
     second, nested for loop:
-        outer loop runs n times
-        inner loop runs 2^{n-1} times
-        total loop runs n(2^{n-1}) times
-        Theta(n(2^{n-1})) = Theta(2^n)
-    T_func2 = Theta(n) + Theta(2^n)
-    T_func2 = Theta(2^n)
+        1 + 2 + 4 + ... + 2^{n-1} = 2^{lg(2^{n-1}) + 1} - 1 = 2(2^{n - 1}) - 1
+        Theta(2(2^{n - 1}) - 1) = Theta(2^n)
+    T_func2 = Theta(n + 2^n) = Theta(2^n)
 */
