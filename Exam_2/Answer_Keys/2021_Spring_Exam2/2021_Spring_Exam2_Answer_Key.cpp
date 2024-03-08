@@ -76,11 +76,9 @@
     Ignoring constant runtime elements
 
     (if n = 100000000, log(n) = 8, lg(log(n)) = 3, outer loop runs 4 times, inner loop runs 8 times)
-    The outer for loop runs lg(log(n))+1 times
-    The inner for loop runs log(n) times
-    The for loop runs (lg(log(n))+1)(log(n)) times
-
-    T(n) = Theta((lg(log(n))+1)(log(n))) = Theta(log(n)lg(log(n)) + log(n)) = Theta(log(n)lg(log(n)))
+    1 + 2 + 4 + ... + 8 (in the described case)
+    1 + 2 + 4 + ... + log(n) = 2^{lg(log(n)) + 1} - 1 = 2*log(n) - 1
+    Tfunc = Theta(2*log(n) - 1) = Theta(log(n))
 
     b. Fixing Ben-El's code
     The code is faulty because first10Squares returns the address of a static array that only existed
