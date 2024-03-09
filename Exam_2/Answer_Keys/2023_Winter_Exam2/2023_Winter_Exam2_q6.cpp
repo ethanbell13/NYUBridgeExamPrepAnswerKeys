@@ -31,11 +31,6 @@ void print_output(int letters_only, std::vector<std::string> string_bin) {
 }
 
 int main() {
-  //while loop that keeps reading lines of strings until empty line
-    //iterate through each character of the input string until you find a number, then change flag and break
-    //if flag is still false, then dont append to vector and add to letters_only
-  //print contents of string vector
-
   std::cout<<"Please enter a non-empty sequence of Strings. Each string should\n"
   <<"be in a separate line and consist of only lowercase English\n"
   <<"letters and/or numerical chracters. To indicate the end of the\n"
