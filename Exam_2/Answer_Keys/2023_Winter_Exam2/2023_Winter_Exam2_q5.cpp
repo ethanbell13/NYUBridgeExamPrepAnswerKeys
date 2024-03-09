@@ -4,7 +4,7 @@
 const int ASCII_CEIL = 90;
 const int ASCII_OFFST = 'a' - 'A';
 
-char lower(char& letter) {
+char lower(char letter) {
   if (letter <= ASCII_CEIL)
     return letter + ASCII_OFFST;
   return letter;
