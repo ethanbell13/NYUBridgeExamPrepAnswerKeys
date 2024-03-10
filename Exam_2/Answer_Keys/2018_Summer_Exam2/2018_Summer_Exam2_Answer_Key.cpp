@@ -61,6 +61,19 @@
     Blue = (1 + 2 + 3 + 4 + 5)/5 = 3
     Red = (1 + 2 + 3)/3 = 2
 
-    Both the red and blue spinners are independent of each other. If X is the sum of their expected values:
-    E[x] = 3 + 2 = 5
+    The expected value of the Blue spinner is as follows:
+    1*(1/5) + 2*(1/5) + 3*(1/5) + 4*(1/5) + 5*(1/5)
+    = 1/5 + 2/5 + 3/5 + 4/5 + 5/5
+    = 15/5
+    = 3
+
+    The expected value of the Red spinner is as follows:
+    1*(1/3) + 2*(1/3) + 3*(1/3)
+    = 1/3 + 2/3 + 3/3
+    = 6/3
+    = 2
+
+    Since both spinners are independent of each other, the sum of the outcomes of the two spinners is equal to 
+    the sum of each spinner's expected outcome:
+    E[X] = 3 + 2 = 5
 */
