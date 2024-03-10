@@ -57,10 +57,6 @@
          = 3
 
     Question 2 of 2:
-    The sum of the fair spinners are the averages of their expected outcomes
-    Blue = (1 + 2 + 3 + 4 + 5)/5 = 3
-    Red = (1 + 2 + 3)/3 = 2
-
     The expected value of the Blue spinner is as follows:
     1*(1/5) + 2*(1/5) + 3*(1/5) + 4*(1/5) + 5*(1/5)
     = 1/5 + 2/5 + 3/5 + 4/5 + 5/5
