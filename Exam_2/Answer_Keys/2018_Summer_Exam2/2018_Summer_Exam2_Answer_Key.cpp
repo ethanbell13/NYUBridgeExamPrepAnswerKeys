@@ -69,7 +69,7 @@
     = 6/3
     = 2
 
-    Since both spinners are independent of each other, the sum of the outcomes of the two spinners is equal to 
+    Since both spinners are independent of each other, the expected value of the sum of the outcomes of the two spinners is equal to 
     the sum of each spinner's expected outcome:
     E[X] = 3 + 2 = 5
 */
