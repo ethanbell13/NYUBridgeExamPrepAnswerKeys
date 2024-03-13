@@ -101,5 +101,5 @@
     evaluating the above expression gives us x(x+1)/2 where x=log_5(n)+1
     Theta(x(x+1)/2) = Theta(x^2) -> Theta(log_5^2(n))
 
-    F_function2(n) = Theta(log_5^2(n))
+    T_function2(n) = Theta(log_5^2(n))
 */
