@@ -57,7 +57,7 @@
     b:
     The total outcomes of rolling 2 dice where the first die is odd is as follows:
     (1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6)
-    (2, 1), ..., (3, 6)
+    (2, 1), ..., (2, 6)
     (3, 1), ..., (3, 6)
     which is 18 total possibilities
 
