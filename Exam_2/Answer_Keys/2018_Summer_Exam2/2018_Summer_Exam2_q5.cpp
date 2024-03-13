@@ -28,7 +28,7 @@ int* findCommon(int arr1[], int arr2[], int n, int& outArrSize) {
 
   delete [] occurrence_arr;
 
-  outArrSize = common_idx++;
+  outArrSize = common_idx;
   return common_arr;
 }
 
