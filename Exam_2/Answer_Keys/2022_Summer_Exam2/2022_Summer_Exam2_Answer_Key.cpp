@@ -61,7 +61,7 @@
     (3, 1), ..., (3, 6)
     which is 18 total possibilities
 
-    The total outcomes of rolling 2 dice where the first die is odd and the sume of the dice is 6 is as follows:
+    The total outcomes of rolling 2 dice where the first die is odd and the sum of the dice is 6 is as follows:
     (1, 5), (3, 3), (5, 1)
     
     There are 3 total outcomes of the possible 18. In other words:
