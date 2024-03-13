@@ -63,6 +63,9 @@
     The amount of 8-bit strings where the number of 0s is greater than the number of 1s is:
     (total possible 8-bit strings) - (number of 8-bit strings where the number of 0s is less than or equal to the number of 1s)
     2^8 - (1 + 8c1 + 8c2 + 8c3 + 8c4)
+    the probability that we will select an 8-bit string where the number of 0s is greater than the number of 1s from among the
+    total number of 8-bit strings is:
+    (2^8 - (1 + 8c1 + 8c2 + 8c3 + 8c4)) / 2^8
 
     b:
     1, 1, 2, 2, 2, 3
@@ -71,23 +74,12 @@
     p(2) = 3/6 = 1/2
     p(3) = 1/6
 
-    sum possibilities:
-    {2, 3, 4, 5, 6}
-    when the sum is 2, the dice roll is (1, 1)
-    when the sum is 3, the dice roll is (1, 2) or (2, 1)
-    when the sum is 4, the dice roll is (1, 3), (3, 1), (2, 2)
-    when the sum is 5, the dice roll is (2, 3) or (3, 2)
-    when the sum is 6, the dice roll is (3, 3)
-
-    x is a random variable that represents the sum of the two given dice rolls
-    x = 2, p(x) = p(1)*p(1) = (1/3)*(1/3) = 1/9
-    x = 3, p(x) = p(1)*p(2) = (1/3)*(1/2) = 1/6
-    x = 4, p(x) = p(1)*p(3) + p(2)*p(2) = (1/3)*(1/6) + (1/2)*(1/2) = 11/36
-    x = 5, p(x) = p(2)*p(3) = (1/2)*(1/6) = 1/12
-    x = 6, p(x) = p(3)*p(3) = (1/6)*(1/6) = 1/36
-
-    E[x] = 2*1/9 + 3*1/6 + 4*11/36 + 5*1/12 + 6*1/36
-         = 91/36
+    let X1 represent the value of the first die
+    let X2 represent the value of the second die
+    E[X1] = E[X2]
+    Linearity of Expectations: E[X1+X2] = E[X1] + E[X2]
+    E[X1] = 1*(2/6) + 2*(3/6) + 3*(1/6) = 11/6
+    E[X1+X2] = 2*(11/6) = 11/3
     
     4.
     Syntax: log_2(n) = lg(n)
