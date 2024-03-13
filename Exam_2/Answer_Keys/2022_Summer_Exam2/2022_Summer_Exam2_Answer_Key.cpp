@@ -55,14 +55,19 @@
     therefore the probability that you randomly pick a ball where the value is greater than or equal to 3 is: 5/8
 
     b:
-    When rolling 2 6-sided die, there are a total of 6^2 or 36 outcomes.
+    The total outcomes of rolling 2 dice where the first die is odd is as follows:
+    (1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6)
+    (2, 1), ..., (3, 6)
+    (3, 1), ..., (3, 6)
+    which is 18 total possibilities
 
-    The total outcomes where the first die is odd and the sum of both die is equal to 6 is as follows:
+    The total outcomes of rolling 2 dice where the first die is odd and the sume of the dice is 6 is as follows:
     (1, 5), (3, 3), (5, 1)
-    There are 3 total outcomes of the possible 36. In other words:
+    
+    There are 3 total outcomes of the possible 18. In other words:
 
     x is the condition where the first die is odd and the sum of both die is equal to 6:
-    p(x) = 3/36 = 1/12
+    p(x) = 3/18 = 1/6
 
     4.
     func1:
