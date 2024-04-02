@@ -33,7 +33,7 @@
                                    = (3 + 1)2^{2k} - 1
                                    = (3*2^{2k}) + (2^{2k} - 1)
     The first parentheses grouping is divisible by 3
-    The second parentheses grouping is P(k) which is divisible by 3
+    The second parentheses grouping is P(k) which is divisible by 3 per the inductive hypothesis
     Therefore P(k+1) is divisible by 3
 
     Therefore P(k) -> P(k+1)
