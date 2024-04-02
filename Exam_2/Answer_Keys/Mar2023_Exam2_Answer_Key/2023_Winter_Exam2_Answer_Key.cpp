@@ -13,8 +13,8 @@
                                         (1+2^l) <= 3^k
     Now show that P(k+1) is true, that is
                                         (1+2^{k+1}) <= 3^{k+1}
-
-                                        (1 + 2^k) <= 3^k
+                                    
+    Using the inductive hypothesis:  (1 + 2^k) <= 3^k
                                   (1 + (2/2)*2^k) <= (3/3)3^k
                               (1 + (1/2)*2^{k+1}) <= (1/3)3^{k+1}
                               (3 + (3/2)*2^{k+1}) <= 3^{k+1}
