@@ -1,50 +1,34 @@
 #include <iostream>
 #include <string>
 
-const int ASCII_CEIL = 90;
-const int ASCII_OFFST = 'a' - 'A';
-
-char lower(char letter) {
-  if (letter <= ASCII_CEIL)
-    return letter + ASCII_OFFST;
-  return letter;
-}
-
-int countConsonants(std::string S, int length) {
-  int sum;
-  char elem;
-
-  if (length == 1) {
-    elem = lower(S[0]);
-
-    if (elem == 'a' || elem == 'e' || elem == 'i' || elem == 'o' || elem == 'u')
-      return 0;
-    else
-      return 1;
-  }
-  else {
-    elem = lower(S[length - 1]);
-
-    if (elem == 'a' || elem == 'e' || elem == 'i' || elem == 'o' || elem == 'u')
-      sum = 0;
-    else
-      sum = 1;
-    
-    return sum + countConsonants(S, length - 1);
-  }
-}
-
-void print_output(std::string S) {
-  std::cout<<S<<" has "<<countConsonants(S, S.length())<<" consonants"<<"\n"<<std::endl;
-}
-
-int main() {
-  print_output("CSBridge");
-  print_output("todayissunny");
-  print_output("PathwaytoCSTandonMS");
-
-  //for me this worked before I implemented the lower function, meaning that countConsonants didn't care if the letter was lower or uppercase. 
-  //I don't understand why it worked so I implemented the lower function just to be safe
-
+int countConsonants(std::string s, int length);
+char toLower(char c);
+int main()
+{
+  using namespace std;
+  string input;
+  cout << "Please enter a string:\n";
+  getline(cin, input);
+  cout << '\"' << input << "\" has " << countConsonants(input, input.length()) << " consonants." << endl;
   return 0;
+}
+int countConsonants(std::string s, int length)
+{
+  char c;
+  if (length == 1)
+  {
+    c = toLower(s[length - 1]);
+    if ('a' <= c && c <= 'z' && c != 'a' && c != 'e' && c != 'i' && c != 'o' && c != 'u')
+      return 1;
+    return 0;
+  }
+  else
+    return countConsonants(s.substr(length - 1, 1), 1) + countConsonants(s.substr(0, length - 1), length - 1);
+}
+char toLower(char c)
+{
+  int difference = 'a' - 'A';
+  if ('A' <= c && c <= 'Z')
+    return c + difference;
+  return c;
 }
