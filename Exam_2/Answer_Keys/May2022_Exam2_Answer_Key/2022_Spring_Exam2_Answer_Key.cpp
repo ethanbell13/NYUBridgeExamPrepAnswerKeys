@@ -42,9 +42,8 @@
     20c5 - 11c5
 
     b:
-    Possibilities where there are 0 women and 0 men on the committee:
-    11c5 + 9c5
-
+    Possibilities where there are 0 women on the committee: 11c5
+    Possibilities where there are 0 men on the comitteee: 9c5
     Possibilities where theres at least one woman and at least one man on the committee:
     20c5 - (11c5 + 9c5)
 
