@@ -27,7 +27,7 @@
     2.
     a:
     Syntax: 7c4 is 7 choose 4
-    
+
     Hal but not Ida:
     {Ann, Ben, Cal, Dot, Ed, Fran, Gail}
     Hal _ _ _ _
@@ -67,7 +67,7 @@
 
     b:
     Syntax: 8c1 is 8 choose 1, etc.
-    
+
     0 0s & 8 1s -> 1 possibility
     1 0  & 7 1s -> 8c1 possibilities
     2 0s & 6 1s -> 8c2 possibilities

@@ -13,7 +13,7 @@
                                         (1+2^l) <= 3^k
     Now show that P(k+1) is true, that is
                                         (1+2^{k+1}) <= 3^{k+1}
-                                    
+
     Using the inductive hypothesis:  (1 + 2^k) <= 3^k
                                   (1 + (2/2)*2^k) <= (3/3)3^k
                               (1 + (1/2)*2^{k+1}) <= (1/3)3^{k+1}
@@ -36,12 +36,12 @@
     there are 62 options to choose from when selecting from a pool of upper and lower-case letters and digits
 
     the total possibilities for the described 5-character password are then:
-    10 * 62 * 62 * 62 * 62 
+    10 * 62 * 62 * 62 * 62
     = 10 * 62^4
 
     b:
     Syntax: 8c5 is 8 choose 5
-    
+
     s = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
     we excommunicate the 3s and 4s to get:
     s' = {1, 2, 5, 6, 7, 8, 9, 10}, leaving us 8 options to choose from
@@ -67,9 +67,33 @@
     total number of 8-bit strings is:
     (2^8 - (1 + 8c1 + 8c2 + 8c3 + 8c4)) / 2^8
 
+    Alternative Solution Technigque for part a:
+
+    A: Let B^n represent the set of
+    bit strings that contain n bits.
+    |B^n| = 2^n
+    |B^8| = 2^8
+    An 8 bit string has either less 0 bits than 1 bits
+    more 1 bits than 0 bits or 4 0 bits.
+    For any 8 bit strings that has more 0 bits, an 8 bit
+    string with more 1 bits can be created by swapping the
+    0 bits with the 1 bits. Therefore,
+    |More 0 bits| = |More 1 bits|
+    |4 0 bits| = C(8, 4)
+    = (8 * 7 * 6 5 * 4!)/(4! * 4!)
+    = (8 * 7 * 6 * 5)/(4 * 3 * 2)
+    = 7 * 2 * 5 = 70
+    |B^8| = |more 0 bits| + |more 1 bits| + |4 0 bits|
+    |B^8| - |4 0 bits| = 2 * |more 0 bits|
+    (|B^8| - |4 0 bits|) / 2 = |more 0 bits|
+    |more 0 bits| = (2^8 - 70)/ 2
+    = 2(2^7 - 35)/2
+    = 2^7 - 35
+    P(|More 0 bits|) = (2^7 - 35)/2^8
+
     b:
     1, 1, 2, 2, 2, 3
-    
+
     p(1) = 2/6 = 1/3
     p(2) = 3/6 = 1/2
     p(3) = 1/6
@@ -80,10 +104,10 @@
     Linearity of Expectations: E[X1+X2] = E[X1] + E[X2]
     E[X1] = 1*(2/6) + 2*(3/6) + 3*(1/6) = 11/6
     E[X1+X2] = 2*(11/6) = 11/3
-    
+
     4.
     Syntax: log_2(n) = lg(n)
-    
+
     func1:
     first, nested for loop:
     outer loop runs lg(100)+1 (7) times
@@ -92,7 +116,7 @@
     the above expression is equal to x(x+1)/2 where x=lg(n)+1
     Theta(x(x+1)/2) = Theta(x^2) -> Theta(lg^2(n))
     the nested for loop has an asymptotic analysis of Theta(7*lg^2(n)) = Theta(lg^2(n))
-    
+
     the second for loop runs lg(n) + 1 times -> Theta(lg(n))
 
     T_function1(n) = Theta(lg^2(n) + lg(n)) = Theta(lg^2(n))
@@ -108,6 +132,6 @@
     T_function2(n) = 1Theta(1) + 2Theta(1) + 4Theta(1) + ... + nTheta(1)
     the above expression is equal to 2^{lg(n)+1}-1 = 2n-1
     Theta(2n-1) = Theta(n), therefore:
-    
+
     T_function2(n) = Theta(n)
 */

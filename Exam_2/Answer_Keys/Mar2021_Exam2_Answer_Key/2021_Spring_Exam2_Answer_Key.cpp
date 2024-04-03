@@ -1,5 +1,7 @@
 /*
     1.
+    (This exam question was written incorrectly, which is why
+    a base case of 6 is needed.)
     Proof: by induction on n
     Let P(n) be the proposition that for every positive integer n, a_n >= (sqrt(2))^n
 
@@ -28,10 +30,10 @@
 
     2.
     syntax: xcy = x choose y
-    
+
     4 digit code: XXXX
     10 total digits: 0123456789
-    
+
     a. No digit is repeated:
     (10 choices) * (9 choices) * (8 choices) * (7 choices)
     10 * 9 * 8 * 7 possible combinations
@@ -43,15 +45,15 @@
     0 1 2 3 4x 5x 6x 7x 8 9
     etc...
     10c4 possible combinations
-    
+
     3.
     When rolling two dice, there are 6^2, or 36 total outcomes
-    
+
     Non-game ending events:
     (1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6) -> 6 combinations when first dice is an odd roll
     (2, 1), (2, 3), (2, 5) -> 3 combinations when first dice is an even roll
     possible combinations: 6*3 + 3*3 = 18 + 9 = 27
-    
+
     Game ending events:
     total outcomes - non-game ending events = 36 - 27 = 9
 
@@ -87,7 +89,7 @@
     but the global scope still needs to reference it. The global scope is instead referencing the address of a
     static array that no longer exists, effectively accessing arbitrary memory when calling the non-existent
     array's indices.
-    
+
     The line that must be changed is the first line after int* first10Squares() {
     int arr[10]; must become int* arr = new int[10];
 

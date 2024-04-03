@@ -20,7 +20,7 @@
                                                        = 4*4^{k+1} + (21 + 4)*5^{2k-1}
                                                        = 4*4^{k+1} + 4*5^{2k-1} + 21*5^{2k-1}
                                                        = 4(4^{k+1} + 5^{2k-1}) + 21*5^{2k-1}
-    The first term is 4*P(k) which is assumed divisible by 21
+    The first term is 4*P(k) which is divisible by 21 per the inductive hypothesis.
     The second term is divisible by 21
     Therefore P(k+1) is divisible by 21
 
@@ -28,7 +28,7 @@
 
     2.
     Syntax: 20c5 is 20 choose 5, etc.
-    
+
     9 women, 11 men, 20 total faculty
     5 members on the committee
 
@@ -82,7 +82,7 @@
 
     T_function1 = Theta(n*log_3(n) + n^2 + 1) = Theta(n^2)
 
-    function2:    
+    function2:
     Syntax: log_2(n) = lg(n)
 
     The total runtime of the nested for loop looks like this:
@@ -91,6 +91,6 @@
     x(x+1)/2 = (x^2 + x)/2
     Theta((x^2 + x)/2) = Theta(x^2)
     Subbing in lg(n)+1 for x gives us (with some simplification) Theta(lg^2(n))
-    
+
     T_function2 = Theta(lg^2(n))
 */
