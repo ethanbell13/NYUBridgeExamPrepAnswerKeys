@@ -20,9 +20,9 @@
     3*3^k >= 3(2^k+k^2)
     therefore, 3^(k+1) >= 2^(k+1) + (k+1)^2
 
-    2. First we must find how many permuations there are for 3 even digits, which is P(5,3)
+    2. First we must find how many permuations there are for 3 even digits, which is P(4,3)
     We then find the perumations for the  remaining 6 digits.
-    Answer = P(5,3)*6! = 5 * 4 * 3 * 6!
+    Answer = P(4,3)*6! = 4 * 3 * 2 * 6!
 
     3.
         A: Range of X = {0, 1, 2, 3, 4, 5}
