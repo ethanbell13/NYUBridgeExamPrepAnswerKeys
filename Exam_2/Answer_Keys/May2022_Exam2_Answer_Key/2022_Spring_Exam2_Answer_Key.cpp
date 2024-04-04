@@ -63,23 +63,34 @@
     E[X] = 6
 
     4.
-    function1:
-    If (n % 3 == 0):
-    the outer for loop runs log_3(n)+1 times
-    the inner for loop runs n times
-    the nested for loop runs n(log_3(n)+1) times
-    Theta(n(log_3(n)+1)) = Theta(n*log_3(n) + n) = Theta(n*log_3(n))
+    function 1:
+        Let k represent constant factors in the runtime.
 
-    If (n % 2 == 0):
-    the outer for loop runs n times
-    the inner for loop runs n times
-    the nested for loop runs n*n times, or n^2 times
-    Theta(n^2)
-
-    Else:
-    Theta(1)
-
-    T_function1 = Theta(n*log_3(n) + n^2 + 1) = Theta(n^2)
+        function1:
+        if (n % 3 == 0 && n % 2 != 0)
+            t(n) = theta(1)+(n+n+...+n)
+            The inner for loop with run time n will run log_3(n) times
+            log_3(n)*n = nlog_3(n)
+            function1 = theta(nlog(n))
+        else if (n % 2 && n % 3 != 0)
+            t(n) = theta(1) + n + n + ... + n
+            the inner for loop with run times
+            n * n = n^2
+            t(n) = theta(1) + theta(n^2)
+            t(n) = theta(n^2)
+            function1 = theta(n^2)
+        else if (n % 6 == 0)
+            t(n) = theta(1) + runtime of first if statement + runtime of second if statement
+            = theta(1) + theta(nlog(n))+theta(n^2)
+            = theta(n^2)
+            function1 = theta(n^2)
+        else
+            function1 = theta(1)
+        function1 = O(n^2)
+        function1 != Omega(n^2)
+        therefore, function1 != Theta(n^2)
+        as there is no Theta for function 1,
+        function1 = O(n^2) is the best description of the asymptotic runtime.
 
     function2:
     Syntax: log_2(n) = lg(n)

@@ -39,10 +39,21 @@
             E[x] = 5/2
 
     4.
-        func1: t(n) = theta(1) + (n - 1) + (1 + 2 + 3 + 4 + ... + n) + theta(1)
-        bigSigma_(i=1)^n i = (n(n+1))/2 = (n^2+n)/2 = theta(n^2)
-        t(n) = theta(1) + theta(n) + theta(n^2)
-        func1 = theta(n^2)
+        function1: t(n) = theta(1) + (n + n + n + ... + n) + ...
+        S(n + n + n + ... + n) = bigSigma_(i = 1)^(log_5(n)) n
+        n* bigSigma_(i = 0)^(log_5(n)) n = n * log_5(n) = theta(nlog(n))
+        t(n) = theta(1) + theta(nlog(n)) + ... + theta(1)
+        if(n % 5)
+            ... = (n + n + ... + n)
+            = n* bigSigma(i=1)^n 1 = n^2
+            t(n) = theta(n^2)
+        else
+            t(n) = theta(nlog(n))
+        Due to the runtime changing everytime that n is divisible by 5
+        func1 != bigOmega(n^2)
+        therefore, func1 != theta(n^2)
+        func1 = O(n^2)
+
 
         func2: t(n) = theta(1) + (n - 1) + (1 + 2 + 4 + 8 + ... + 2^(n-1))
         t(n) = theta(1) + theta(n) + theta(1 + 2 + 4 + ... + 2^n)

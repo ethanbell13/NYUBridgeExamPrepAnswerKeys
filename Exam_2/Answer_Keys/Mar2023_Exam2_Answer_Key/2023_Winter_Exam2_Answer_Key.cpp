@@ -25,19 +25,11 @@
     Therefore P(k) -> P(k+1)
 
     2.
-    a:
-    5-character password
-    26 lower-case letters
-    26 upper-case letters
-    10 digits
-
-    a digit is required in the password while the remaining 4 spaces can be occupied by upper or lower-case letters or digits
-    there are 10 options to choose from with the required digit in the password
-    there are 62 options to choose from when selecting from a pool of upper and lower-case letters and digits
-
-    the total possibilities for the described 5-character password are then:
-    10 * 62 * 62 * 62 * 62
-    = 10 * 62^4
+    a: |S| = 62^5
+    |No digits| = 52^5
+    |At least one digit| = 62^5 - 52^5
+    It will take (62^5 - 52^5) units of time to
+    check evey potential password.
 
     b:
     Syntax: 8c5 is 8 choose 5
