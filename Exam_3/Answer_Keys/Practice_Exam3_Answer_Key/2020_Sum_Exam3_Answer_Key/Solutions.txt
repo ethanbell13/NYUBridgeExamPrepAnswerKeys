@@ -1,0 +1,174 @@
+1. b 
+
+2. c
+
+3. b
+
+4. 2 3 + 4 6 5 - * +
+
+5. -1.5
+
+6. I would need a height function that takes in a boolean by reference 
+and a node pointer. This height function returns 0 when the node pointer 
+is null. Otherwise, it calls the height function passing the left child, 
+repassing the same boolean argument, and storing the result in an 
+integer. Next, it calls the height function passing the right child, 
+repassing the same boolean argument, and storing the result in another 
+integer. The height function will then find the difference of the two 
+integers. If the difference is greater than 1, it will set the boolean 
+argument to false. Next, it will find the greater of the two integers, 
+increment that integer by 1, and return it. In the function that
+determines if the tree is balanced, I would initialize a boolean called 
+balanced to true. I would then call the height function passing the root 
+and the variable named balanced as arguments.Finally, I would return the 
+variable named balanced. Since this variable was initialized to true and 
+would have been set to false in at least one of the calls to the height 
+function if the root's left and right children were 
+unbalanced, or if any of the subtrees in the tree were unbalanced,
+I know that balanced will say true for a balanced tree and false for an 
+unbalanced tree. I also know that it will run in Theta(n), because each 
+call of the height function costs theta(1) and it will be called theta(n) 
+times.
+
+7. 
+template<class T>
+LListNode<T>* LList<T>::concatenateLists(LListNode<T> *l1, LListNode<T> *l2)
+{
+    //If calling list is not empty, deallocate memory within list.
+    if(head != nullptr)
+        clear();
+    if(l1 != nullptr)
+    {
+        head = new LListNode<T>(l1->data);
+        l1 = l1->next;
+    }
+    else if(l2 != nullptr)
+    {
+        head = new LListNode<T>(l2->data);
+        l2 = l2->next;
+    }
+    else
+        head = nullptr;
+    LListNode<T> *temp = head;
+    while(l1 != nullptr)
+    {
+        temp->next = new LListNode<T>(l1->data);
+        temp = temp->next;
+        l1 = l1->next;
+    }
+    while(l2 != nullptr)
+    {
+        temp->next = new LListNode<T>(l2->data);
+        temp = temp->next;
+        l2 = l2->next;
+    }
+    return head;
+}
+
+8. 
+#include <set>
+#include <iterator>
+#include <fstream>
+#include <iostream>
+using namespace std;
+
+void readInput(ifstream &in, set<int> &idNums);
+void writeOutput(ofstream &out, set<int> &idNums);
+
+int main()
+{
+    set<int> idNums;
+    string fileName;
+    cout << "Please enter the file  name: ";
+    cin >> fileName;
+    ifstream in(fileName);
+    if (in.fail())
+    {
+        cout << "The input file failed to open.";
+        exit(1);
+    }
+    readInput(in, idNums);
+    in.close();
+    ofstream out("output.txt");
+    if (out.fail())
+    {
+        cout << "The output file failed to open.";
+        exit(1);
+    }
+    writeOutput(out, idNums);
+}
+
+void readInput(ifstream &in, set<int> &idNums)
+{
+    int num;
+    while (in >> num)
+        idNums.insert(num);
+}
+void writeOutput(ofstream &out, set<int> &idNums)
+{
+    set<int>::iterator itr;
+    for (itr = idNums.begin(); itr != idNums.end(); itr++)
+        out << *itr << '\n';
+}
+
+9. 
+template<class T>
+list<T> lListofLessOrEqual(BSTNode<T>* root, T value)
+{
+    list<T> result;
+    if(root == nullptr)
+        return result;
+    BSTNode<T> *temp = root;
+    BSTNode<T> *prev = temp;
+    while(temp != nullptr)
+    {
+        prev = temp;
+        if(value < temp->value)
+            temp = temp->left;
+        else if(value > temp->value)
+            temp = temp->right;
+        else
+            break;
+    }
+    if(temp == nullptr)
+        temp = prev;
+    if(temp != nullptr && temp->value > value)
+        temp = temp->parent;
+    push_front_subtree(l, temp->left);
+    l.push_front(temp->value);
+    while(temp->value > temp->parent->value)
+    {
+        temp = temp->parent;
+        push_front_subtree(l, temp->left);
+        l.push_front(temp->value);
+    }
+}
+template<class T>
+void push_front_subtree(list<T> &l, BSTNode<T> *n)
+{
+    if(n == nullptr)
+        return;
+    else
+    {
+        push_front_subtree(l, n->left);
+        l.push_front(n->value);
+        push_front_subtree(l, n->right);
+    }
+}
+
+10.
+class Exam
+{
+public:
+    virtual int getResults() = 0;
+};
+class WrittenExam : public Exam
+{
+public:
+    virtual int getResults() {return 1;}
+};
+class PracticalExam : public Exam
+{
+publiic:
+    virtual int getResults() {return -1;}
+}
