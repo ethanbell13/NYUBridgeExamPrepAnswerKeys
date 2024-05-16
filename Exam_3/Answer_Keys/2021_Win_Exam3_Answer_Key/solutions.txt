@@ -1,0 +1,126 @@
+1. d
+
+2. b
+
+3. b 
+
+4. c 
+
+5. 
+int BST::getMedian() {return *root;}
+
+6. Let stack A represent the unsorted stack and stack B represent the 
+eventually sorted version of A. I would sort A into B by calling a recursive 
+function that returns void and takes two stacks by reference with variables A 
+and B. If A is empty, the recursive function terminates with a return 
+statement. Else if B is empty, the recursive function pops the top of stack A 
+and pushes it to the top of stack B. Otherwise, the recursie function pops the 
+top of A and stores its value in an interger named temp. It then calls the top 
+function on stack B and stores that value in an integer variable named temp2. 
+If temp is less than or equal to temp2. The function pushes temp to the top of
+B and calls the recurisve function again passing A and B. A now has one fewer 
+members moving it closer to the base case. If temp is greater than temp2, the 
+recursive function will push temp2 to the top of stack A, subsequently push 
+temp to the top of stack A, pop the top value of stack B, and finally call the 
+recursive function passing A and B as arguments. In this case, B now has one 
+fewer members and the top two values of A are in sorted order. Since this case
+moves B closer to being empty and sorts A until B is empty or B has a value 
+that is greater than the top of A resutling in A pushing each of its previously
+sorted members one by one, this case moves the recrusive function to the base 
+case. After the resursive function has finished, A will be empty and B will be 
+sorted in reverse order. I then push B to A. This results in A being sorted 
+with the top of A being the largest member of A and the bottom of A being the 
+smallest member of A. The comparison symbols in the recursive function can be 
+swapped to sort A in the other direction.
+
+7. First I would create an integer named count and set it to 0. Next, I would
+create an ifstream variable called inStream, pass the file name in its 
+constructor, and test if it opened correctly with inStram.fail().
+If the inStream failed to open, an error message is printed to the
+terminal and exit(1) is called. The next step is to create a char variable called
+temp. This is followed by a while loop with condition !instream.fail(). Within
+the while loop, the statment get(temp) is executed and count is incremented by 
+1. After the while loop reads the entire file, I would call inStream.close(), 
+followed by inStream.clear(), followed by inStream.open(fileName). I again test
+if the file was opened correctly as described earlier. 
+Next I call inStream.seekg(count / 2 + 1), which will move inStream to the 
+middle of the file. Finally, I can find the middle character in the file by 
+declaring a character variable named result and then executing the statement 
+get(result). The instructions did not clarify how to treat whitespace, so this
+fucntions counts blank spaces and newline spaces as well.
+
+8. 
+#include <fstream>
+#include <iostream>
+#include <string>
+using namespace std;
+
+double percentageOfFirstNamesOnly(ifstream &in, string fileName);
+
+int main()
+{
+    ifstream in;
+    cout << percentageOfFirstNamesOnly(in, "file.txt");
+    return 0;
+}
+double percentageOfFirstNamesOnly(ifstream &in, string fileName)
+{
+    int totalCount = 0, oneNameCount = 0;
+    string line;
+    in.open(fileName);
+    if (in.fail())
+    {
+        cout << "File failed to open." << endl;
+        exit(1);
+    }
+    while (!in.fail())
+    {
+        getline(in, line);
+        bool oneWord = true;
+        bool inFirstword = true;
+        for (int i = 0; i < line.size(); i++)
+            if (line[i] == ' ')
+                inFirstword = false;
+            else if (!inFirstword && line[i] != ' ')
+                oneWord = false;
+        if (line.size() != 0)
+            totalCount++;
+        if (oneWord && line.size() != 0)
+            oneNameCount++;
+    }
+    if (oneNameCount != 0)
+        return (double)oneNameCount / totalCount;
+    else
+        return 0;
+}
+
+9. 
+template <class T>
+void pushNodeToVector(TreeNode<T> *n, std::vector<T> &v);
+template <class T>
+bool compare(TreeNode<T> *root1, TreeNode<T> *root2);
+template <class T>
+bool compare(TreeNode<T> *root1, TreeNode<T> *root2)
+{
+    vector<T> v1 = pushNodeToVector(root1, v1);
+    vector<T> v2 = pushNodeToVector(root2, v2);
+    if(v1.size() != v2.size())
+        return false;
+    for(int i = 0; i < v1.size(); i++)
+        if(v1.at(i) != v2.at(i))
+            return false;
+    return true;
+}
+template <class T>
+void pushNodeToVector(TreeNode<T> *n, std::vector<T> &v)
+{
+    if (n != nullptr)
+    {
+        pushNodeToVector(n->left);
+        v.push_back(n->data);
+        pushNodeToVector(n->right);
+    }
+}
+
+10.
+
