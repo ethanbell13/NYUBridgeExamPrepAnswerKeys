@@ -1,0 +1,160 @@
+1. B
+
+2. A, D //Are we supposed to select multiple answers?
+        //Does tree make it too vague to be an optioin.
+
+3. A
+
+4. ptr->member(); or (*ptr).member();
+
+5. 2 3 4 * + 5 6 7 / + +
+
+6. cout << root->right->data; // check if data should be getData()
+
+7. I would create a recursive function called containsDuplicates that takes
+in a BSTNode pointer and a boolean value called result that is passed by 
+reference. It would also return void. When calling the containsDuplicates 
+function for the first time, I would pass it the root node and a boolean
+variable that is set to false. containsDuplicates would first check if 
+the node is a nullptr. In that case, it would return nothing. Next, it 
+would check if result is set to false. If result is not set to false,
+the function does nothing else. If result is set to false, the function
+will check if the node's data value is equivalent to the left child's data
+value or the right child's data value. If either of those data values are 
+equivalent to the node's data value, then result will be set to true and
+the function will do nothing else. If neither child has an equivalent
+data value to the parent node, the containsDuplicates function will be
+called again with a pointer to the left child and the result arguement
+variable passed as arguements. If result is still set to false after that
+function call, then containsDuplicates will be called with a pointer to
+the right child and the result variable arguement passed as arguements.
+Since the initial value of the bool variable was set to false, it will 
+still be false after iterating through the tree, unless a duplicate value
+was found. Since no additional data structures are created, the memory 
+usage is Theta(1). For a tree that does not contain duplicates, this
+recursive function will check each node with a runtime of Theta(n).
+This Theta(n) would hold true in a perfectly balanced tree and a completely
+unbalanced tree. For a tree that does contain duplicates, runtime would 
+depend on where the first duplicate pair is located. This results in
+a worst case runtime of O(n).  
+// Check if we should consider the recurisve call stacks to be part of the
+// memory usage
+8. First I would check if the first node's next pointer and previous 
+pointers are both pointing to nullptrs. If they are, this is an empty list
+and is not defective. Next,  I would check if the previous pointer is set 
+to nullptr and that the first node's next pointer is pointing to a node 
+whose previous pointer is pointing back to the first node. If this check 
+evaluates to false, I now know that the this is a defective linked list.
+ Next,  I would create
+a temp node pointer and set it to the first node's next pointer. Then, I 
+would run through a while loop that will run as long as temp's next pointer 
+is not set to nullptr. For each iteration of the while loop, I would check
+if temp's next pointer is pointing to a node whose previous pointer is 
+pointing back to temp. If this check evaluates to false, I now know that 
+this is a defective linked list. Next, I will set temp to temp's next 
+pointer and go through the while loop again. I know that the while loop
+will end eventually, because if the next pointer of one of the Node's in 
+the list points to a previous node, the if statement will return false
+when checking the previous node pointer of that node. For a non-defective
+list, this method will run throug the list once with a runtime of Theta(n).
+For a defective list, the runtime is constant for the best case and it is
+O(n) for the worst case. This method uses Theta(1) additional memory.
+// Do the instructions mean that I have access to the head and tail of 
+// the list?
+
+9. 
+#include <iostream>
+#include <fstream>
+#include <set>
+using namespace std;
+
+void readInput(ifstream &in, set<pair<int, double>> &ids, set<pair<double, int>> &grades);
+void writeOutput(ofstream &outIds, ofstream &outGrades, set<pair<int, double>> &ids, set<pair<double, int>> &grades);
+
+int main()
+{
+    ifstream in("exam3.txt");
+    set<pair<int, double>> ids;
+    set<pair<double, int>> grades;
+    readInput(in, ids, grades);
+    ofstream idsOut("sortedbyID.txt");
+    ofstream gradesOut("sortedbyGrade.txt");
+    writeOutput(idsOut, gradesOut, ids, grades);
+    return 0;
+}
+void readInput(ifstream &in, set<pair<int, double>> &ids, set<pair<double, int>> &grades)
+{
+    int id;
+    double grade;
+    while (in >> id)
+    {
+        in >> grade;
+        ids.insert({id, grade});
+        grades.insert({grade, id});
+    }
+}
+void writeOutput(ofstream &outIds, ofstream &outGrades, set<pair<int, double>> &ids, set<pair<double, int>> &grades)
+{
+    for (set<pair<int, double>>::iterator itr = ids.begin(); itr != ids.end(); itr++)
+        outIds << itr->first << ' ' << itr->second << '\n';
+    for (set<pair<double, int>>::iterator itr = grades.begin(); itr != grades.end(); itr++)
+        outGrades << itr->second << ' ' << itr->first << '\n';
+}
+
+10.
+#include <iostream>
+using namespace std;
+
+class Vehicle
+{
+    // Represents the penny value of tolls incurred. eg. 500 represents 5 dollars
+    int tollTotal;
+    // Represents the penny value of toll rate. eg. 500 represents 5 dollars
+    int tollRate;
+
+public:
+    Vehicle() : tollTotal(0) {}
+    int getTollTotal() const { return tollTotal; }
+    void setTollTotal(int totalIn) { tollTotal = totalIn; }
+    void setTollRate(int rateIn) { tollRate = rateIn; }
+    int getTollRate() const { return tollRate; }
+    virtual void incurToll() = 0;
+};
+class Car : public Vehicle
+{
+public:
+    // toll Rate of 500 represents a toll rate of 500 pennies or 5 dollars.
+    Car() { setTollRate(500); }
+    virtual void incurToll();
+};
+class Truck : public Vehicle
+{
+public:
+    // toll Rate of 2500 represents a toll rate of 2500 pennies or 25 dollars.
+    Truck() { setTollRate(2500); }
+    virtual void incurToll();
+};
+class TollBooth
+{
+    // Represents the penny value of daily toll revenue. eg. 500 represents 5 dollars
+    int total;
+
+public:
+    TollBooth() : total(0){};
+    int getRevenue() const { return total; }
+    void processToll(Vehicle *v);
+};
+
+void Car::incurToll()
+{
+    setTollTotal(getTollTotal() + getTollRate());
+}
+void Truck::incurToll()
+{
+    setTollTotal(getTollTotal() + getTollRate());
+}
+void TollBooth::processToll(Vehicle *v)
+{
+    total += v->getTollRate();
+    v->incurToll();
+}

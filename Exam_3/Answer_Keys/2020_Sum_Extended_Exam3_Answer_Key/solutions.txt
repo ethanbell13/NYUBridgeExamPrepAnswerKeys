@@ -1,0 +1,133 @@
+1. a 
+
+2. It can be replaced with the line 
+        cout << one->x << endl;
+
+3. cout << root->children.at(1)->children.at(0)->data << endl;
+
+4. a pure virtual function
+
+5. /* What does in-order traversal mean for an unsorted tree. Why would we ever
+have an unsorted tree?*\
+void printInOrder(BSTNode<T> *n)
+{
+    if(n == nullptr)
+        return;
+    else
+    {
+        printInOrder(n->left);
+        cout << n->data;
+        printInOrder(n->right);
+    }
+}
+int main()
+{
+    printInOrder(root);
+    return 0;
+}
+
+6. a 
+
+7. b 
+
+8. 
+#include <iostream>
+#include <set>
+#include <fstream>
+using namespace std;
+
+void readInput(ifstream &in, multiset<string> &words);
+void outputWordsAndFrequency(multiset<string> &words);
+
+int main()
+{
+    ifstream in;
+    string fileName;
+    do
+    {
+        cout << "Please enter the filename: ";
+        cin >> fileName;
+        in.clear();
+        in.open(fileName);
+        if (in.fail())
+            cout << "File failed to open." << endl;
+    } while (in.fail());
+    multiset<string> words;
+    readInput(in, words);
+    in.close();
+    outputWordsAndFrequency(words);
+}
+
+void readInput(ifstream &in, multiset<string> &words)
+{
+    string word;
+    while (in >> word)
+        words.insert(word);
+}
+void outputWordsAndFrequency(multiset<string> &words)
+{
+    multiset<string>::iterator previous = words.begin();
+    auto itr = words.begin();
+    if (previous != words.end())
+        itr++;
+    else
+        return;
+    int count = 1;
+    for (itr; itr != words.end(); itr++)
+    {
+        if (*itr == *previous)
+            count++;
+        else
+        {
+            cout << *previous << ' ' << count << endl;
+            count = 1;
+        }
+        previous++;
+    }
+    cout << *previous << ' ' << count << endl;
+}
+
+9. I would first instantiate a multiset 
+from the STL. If the original stack does not need
+to be preserved, I would then pop each item out 
+of the stack inserting each item into the multiset
+as they are popped. If the orginal stack needs to
+be preserved, I would create a copy of the stack,
+and  then do perform the previous step with that
+copy. Next, I would iterate through the set
+using an iterator and a for loop and outputing 
+the current dereferenced iterator with each
+iteration. The insertion function on a
+multiset runs in O(nlogn). This function would
+be called n times. Outputting the stack would take
+as additional n time. 
+Overal the runtime would be Theta(nlogn).
+
+10. 
+bool BST::checkTree()
+{
+    if(root->left != nullptr && root->left->parent != root)
+            return false;
+    if(root->right != nullptr && root->right->parent != root)
+            return false;
+    bool correct = true;
+    checkTree(root->left, correct);
+    checkTree(root->right, correct);
+    return correct;
+}
+void BST::checkTree(BSTNode *n, bool &correct)
+{
+    if(n != nullptr)
+    {
+        if(n->left != nullptr && n->left->parent != n)
+            correct = false;
+        if(n->right != nullptr && n->right->parent != n)
+            correct = false;
+        if(correct)
+        {
+            checkTree(n->left, correct);
+            checkTree(n->right, correct);
+        }
+    }    
+}
+

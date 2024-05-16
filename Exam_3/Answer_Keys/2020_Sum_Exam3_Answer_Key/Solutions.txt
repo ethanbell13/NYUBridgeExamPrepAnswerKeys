@@ -172,3 +172,84 @@ class PracticalExam : public Exam
 publiic:
     virtual int getResults() {return -1;}
 }
+
+10.
+#include <iostream>
+using namespace std;
+
+// Expression Tree Node
+class ETNode
+{
+    int data;
+    char otr;
+    ETNode *parent;
+    ETNode *left;
+    ETNode *right;
+
+public:
+    // n stands for not an operator
+    ETNode(int dataIn) : data(dataIn), otr('n'), parent(nullptr),
+                         left(nullptr), right(nullptr){};
+    ETNode(char otrIn) : data(0), otr(otrIn), parent(nullptr),
+                         left(nullptr), right(nullptr) {}
+    int calculateValue();
+    friend class ET;
+};
+// Expression Tree
+class ET
+{
+    ETNode *root;
+
+public:
+    ET() : root(nullptr) {}
+    ET(int one);
+    int CalculateValue() { return root->calculateValue(); }
+};
+
+// test code(not part of assignment)
+int main()
+{
+    ET test(1);
+    cout << test.CalculateValue();
+    return 0;
+}
+
+int ETNode::calculateValue()
+{
+    if (otr == 'n')
+        return data;
+    if (left == nullptr || right == nullptr)
+    {
+        cout << "Error. Operator called without left and right values." << endl;
+        exit(1);
+    }
+    else if (otr == '+')
+
+        return left->calculateValue() + right->calculateValue();
+    else if (otr == '-')
+        return left->calculateValue() - right->calculateValue();
+    else if (otr == '*')
+        return left->calculateValue() * right->calculateValue();
+    else if (otr == '/' && right->data != 0)
+        return left->calculateValue() / right->calculateValue();
+    else if (otr == '/')
+    {
+        cout << "Error division by 0." << endl;
+        exit(1);
+    }
+    else
+    {
+        cout << "Error, undefined behavior." << endl;
+        exit(1);
+    }
+}
+
+// test code(not part of assignment)
+ET::ET(int one) : root(nullptr)
+{
+    root = new ETNode('*');
+    root->left = new ETNode('+');
+    root->left->left = new ETNode(2);
+    root->left->right = new ETNode(3);
+    root->right = new ETNode(7);
+}
