@@ -1,0 +1,127 @@
+1. c
+
+2. b
+
+3. 3 4 5 + * 2 /
+
+4. 
+    a: The MyClass constructor.
+
+    b: The MyClass copy constructor.
+
+    c: The MyClass destructor.
+
+5. 2 5 4 3 8 9 7
+
+6. 
+#include <vector>
+#include <algorithm>
+#include <string>
+using namespace std;
+
+vector<double> getBusLineInfo(string busLine);
+
+bool bussesTooClose(string busLine)
+{
+    vector<double> distances = getBusLineInfo(busLine);
+    sort(distances.begin(), distances.end());
+    for (int i = 1; i < distances.size(); i++)
+        if (distances.at(i) - distances.at(i - 1) < 1)
+            return true;
+    return true;
+}
+
+7. 
+void LList<T>::fixList(LListNode<T> *head)
+{
+    if(head == nullptr)
+        return;
+    LListNode<T> *n = head;
+    LListNode<T> *temp = nullptr;
+    int count = 0;
+    while(n != nullptr)
+    {
+        if(count % 2 != 0)
+        {
+            temp = n->next;
+            n->next = n->previous;
+            n->previous = temp;
+            temp = nullptr;
+        }
+        n = n->next;
+        count++;
+    }
+}
+
+8. 
+#include <vector>
+#include <iostream>
+using namespace std;
+
+class Discount
+{
+    double percent;
+    double value;
+
+public:
+    Discount(double percentIn = 0, double valueIn = 0) : percent(percentIn), value(valueIn) {}
+    virtual double calculateFinalDiscount(double originalPrice) = 0;
+    double getValue() const { return value; }
+    double getPercent() const { return percent; }
+};
+class SingleValueDiscount : public Discount
+{
+public:
+    SingleValueDiscount(double value) : Discount(0, value) {}
+    virtual double calculateFinalDiscount(double originalPrice) { return originalPrice - getValue(); }
+};
+class SinglePercentDiscount : public Discount
+{
+public:
+    SinglePercentDiscount(double percent) : Discount(percent) {}
+    virtual double calculateFinalDiscount(double originalPrice) { return originalPrice * (1 - getPercent()); }
+};
+class MultiDiscount : public Discount
+{
+public:
+    MultiDiscount(double percent, double value) : Discount(percent, value) {}
+    virtual double calculateFinalDiscount(double originalPrice) { return (originalPrice - getValue()) * (1 - getPercent()); }
+};
+class Order
+{
+    vector<double> prices;
+    vector<Discount *> discounts;
+
+public:
+    double totalCost();
+    void addItem(double price, Discount *d);
+};
+
+double Order::totalCost()
+{
+    double total = 0;
+    for (int i = 0; i < prices.size(); i++)
+        if (discounts.at(i) == nullptr)
+            total += prices.at(i);
+        else
+            total += discounts.at(i)->calculateFinalDiscount(prices.at(i));
+    return total;
+}
+void Order::addItem(double price, Discount *d)
+{
+    prices.push_back(price);
+    discounts.push_back(d);
+}
+
+int main()
+{
+    Order firstOrder;
+    SingleValueDiscount svd10(10);
+    SinglePercentDiscount spd5(.5);
+    MultiDiscount md(.102, 5.5);
+    firstOrder.addItem(20, &svd10);
+    firstOrder.addItem(100, &spd5);
+    firstOrder.addItem(20, &md);
+    firstOrder.addItem(20, nullptr);
+    cout << firstOrder.totalCost() << endl;
+}
