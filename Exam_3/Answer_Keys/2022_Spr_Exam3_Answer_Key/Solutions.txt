@@ -1,0 +1,194 @@
+1. b 
+
+2. This will print nothing because you can not use
+the -> operator on an object. You can only use it
+on pointers.
+
+3. 
+void printLeaves(TreeNode *node)
+{
+    if(node-> right == nullptr && node->left == nullptr)
+        cout node->data;
+    else if(node->left != nullptr)
+        printLeaves(node->left);
+    else if(node->right != nullptr)
+        printLeaves(node->right);
+}
+
+4. c & a //heap sort is not currently a part of bridge material
+
+5. 
+#include <fstream>
+#include <string>
+#include <set>
+#include <iostream>
+using namespace std;
+
+void readInput(ifstream &in, multiset<string> &words);
+void printWordsAndCounts(multiset<string> &words);
+
+int main()
+{
+    string fileName;
+    cout << "Please enter the file name: ";
+    cin >> fileName;
+    ifstream in(fileName);
+    while (in.fail())
+    {
+        cout << "File failed to open. Please enter file name again: ";
+        cin >> fileName;
+        in.clear();
+        in.open(fileName);
+    }
+    multiset<string> words;
+    readInput(in, words);
+    in.close();
+    printWordsAndCounts(words);
+    return 0;
+}
+
+void readInput(ifstream &in, multiset<string> &words)
+{
+    string word;
+    while (in >> word)
+        words.insert(word);
+}
+void printWordsAndCounts(multiset<string> &words)
+{
+    multiset<string>::iterator previous = words.begin();
+    multiset<string>::iterator itr = words.begin();
+    int count = 1;
+    for (++itr; itr != words.end(); itr++)
+    {
+        if (*itr == *previous)
+            count++;
+        else
+        {
+            cout << *previous << ' ' << count << endl;
+            count = 1;
+        }
+        previous = itr;
+    }
+    if (count != 1)
+        cout << *previous << ' ' << count << endl;
+}
+
+6. 
+#include <stack>
+using namespace std;
+/*This is done in constant space, because at any
+point in time, s.size() + s2.size() is equal to the
+original size of s. Additionally, this function
+returns the initial stack to its original order.*/
+int countOccurences(stack<int> s, int x)
+{
+    stack<int> s2;
+    int count = 0;
+    while (!s.empty())
+    {
+        int temp = s.top();
+        if (temp == x)
+            count++;
+        s.pop();
+        s2.push(temp);
+    }
+    while (!s2.empty())
+    {
+        s.push(s2.top());
+        s2.pop();
+    }
+    return count;
+}
+
+7. First I would create a recursive function called findLowest that finds the
+lowest element of a tree by traversing down in the leftward direction until 
+it arrives at a node whose left pointer is null. At that point, it returns the
+current node. Within my main function, I would call findLowest passing it the
+root of the tree and store the result in a AVL node pointer called temp. I would
+then store the value of node in a variable called tempMin. I would also create an
+interger variable called count and set it to 1. Next, I would enter a while loop
+that has count < index(Nth is the index) as its condition. This while loop calls an overloaded
+version of findLowest that also takes an integer as a parameter called min and then returns
+the lowest node in the tree that is larger than min. When calling this verison of
+findLowest, I pass temp and tempMin as arguements and store the result in temp. 
+I then store temp's value in tempMin. Next I increment count by 1 and finish this
+iteratioin of the loop. Once the while loop stops running, I know that count equals
+index and that temp is the Nth node in the tree. I then return temp. 
+AVLNode<T>* findLowest(AVLNode<T>* n, int min) works by checking if 
+min is less than n->left. If it is, it calls itself passing n->left and min as
+arguements. Next it checks if min is less than n's value. If it is, it returns
+n. Next it checks if min is less than n->right. If it is, it calls findLowest passing
+n->right and min as arguements. If none of the previous if and else if statements 
+were evaluated to true, it calls findLowest passing n->parent and min as its arguements.
+This function will always return the node with the lowest value that is greater
+than min. Since the AVL tree is relatively balanced, each call of findLowest 
+within the while loop will take a maximum of O(log(n)) time. Since count is incremented
+by one with each iteration of the while loop, it will run n times. Therefore,
+the worst case runtime is O(nlog(n)). If the n in the Nth element is larger
+than the size of the tree, the behavior of this funciton is undefined. Without
+any change to the asymptopic runtime, this function can start by calculating the size
+of the tree and then return an error code if n is larger than the size.
+
+8. 3 1 5 2 7 8
+
+9. 
+#include <string>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+class Device
+{
+    string serialNumber;
+
+public:
+    Device(string serialNumberIn) : serialNumber(serialNumberIn) {}
+    string getSerialNumber() const { return serialNumber; }
+    virtual void print() = 0;
+};
+
+class Laptop : public Device
+{
+    int ram;
+
+public:
+    Laptop(string serialNumber, int ramIn) : Device(serialNumber), ram(ramIn) {}
+    virtual void print() { cout << "Serial: " << getSerialNumber() << " ram: " << ram << endl; }
+};
+
+class Projector : public Device
+{
+    int bulbLife;
+
+public:
+    Projector(string serialNumber, int bulbLifeIn) : Device(serialNumber), bulbLife(bulbLifeIn) {}
+    virtual void print() { cout << "Serial: " << getSerialNumber() << " bulb life: " << bulbLife << endl; }
+};
+
+class Composite
+{
+    vector<Device *> devices;
+
+public:
+    Composite() {}
+    void printItem(int index) { devices.at(index)->print(); }
+    void operator+=(Device *d) { devices.push_back(d); }
+};
+
+int main()
+{
+    Laptop dell("abc123", 8096);
+    cout << "Dell: " << endl;
+    dell.print();
+    Projector epson("xyz34891", 10000);
+    cout << "Projector: " << endl;
+    epson.print();
+    Composite together;
+    together += &dell;
+    together += &epson;
+    cout << "************************" << endl;
+    cout << "Together " << endl;
+    together.printItem(0);
+    together.printItem(1);
+    return 0;
+}
