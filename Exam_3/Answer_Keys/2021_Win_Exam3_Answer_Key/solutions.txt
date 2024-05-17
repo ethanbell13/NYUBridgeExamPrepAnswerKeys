@@ -123,4 +123,43 @@ void pushNodeToVector(TreeNode<T> *n, std::vector<T> &v)
 }
 
 10.
+#include <iostream>
+#include <vector>
+using namespace std;
 
+class GenericBook
+{
+    double authorCost;
+    int materialCost;
+
+public:
+    GenericBook(double costIn = 0, int materialCostIn = 0) : authorCost(costIn), materialCost(materialCostIn) {}
+    double getAuthorCost() const { return authorCost; }
+    double getMaterialCost() const { return materialCost; }
+    virtual double price() = 0;
+};
+class PaperBackBook : public GenericBook
+{
+public:
+    PaperBackBook(double authorCostIn) : GenericBook(authorCostIn, 5) {}
+    virtual double price() { return getMaterialCost() + getAuthorCost(); }
+};
+class HardCoverBook : public GenericBook
+{
+
+public:
+    HardCoverBook(double authorCostIn) : GenericBook(authorCostIn, 25) {}
+    virtual double price() { return getMaterialCost() + getAuthorCost(); }
+};
+
+int main()
+{
+    double totalValue = 0;
+    vector<GenericBook *> inventory;
+    inventory.push_back(new PaperBackBook(5.25)); // Actual cost is $10.25
+    inventory.push_back(new HardCoverBook(3));    // Actual cost is $28
+    inventory.push_back(new PaperBackBook(7));    // Actual cost is $12
+    for (int i = 0; i < inventory.size(); i++)
+        totalValue += inventory[i]->price();
+    cout << "Total value of the inventory is: " << totalValue << endl; // Prints: $50.25
+}
