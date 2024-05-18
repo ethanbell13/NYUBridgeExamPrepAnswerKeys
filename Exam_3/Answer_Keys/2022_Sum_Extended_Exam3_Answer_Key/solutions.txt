@@ -1,0 +1,161 @@
+1. b 
+
+2. The code is trying to derefernce a pointer that hasn't been
+given a memory address to refer to.
+
+3. /*This questio appears to have a typo. It says this function is in the
+Queue class but then asks for a copy of the existing stack. I will I assume
+that the question asks for a copy of the currrent Queue in reverse order*/
+Queue<T>& reverse();
+
+4. 2 3 + 4 6 5 - * +
+
+5. delete[] ptr;
+
+6. (++ptr)->callMe();
+
+7. 
+template <class T>
+Stack<T> Stack<T>::operator-()
+{
+    Stack<T> result;
+    Stack<T> temp = *this;
+    while (!temp.empty())
+        result.push_back(temp.pop());
+    return result;
+}
+
+8. I would create a set<int> variable and then iterate through the vector with
+a for loop. For each iteration of the for loop, I would push the value of that
+iteration's vector member to the set using the set's insertion method. After 
+iterating through the entire vector, the size function of the set would be 
+equal to the number of unique items in the vector. I know this is true, because 
+the set function does not accept duplicate values. Since set is implemented as
+a balanced BST(usually a red black tree), it performs each insertion operation
+in O(log(n)) time. This function is called for a total of n times, so the 
+runtime is O(nlog(n)). Let x represent the number of unique items in the 
+vector. This function uses Theta(x) additional memory. The average additional 
+memory used, would be O(n).
+
+9.
+/* I'm not sure if any of the three periods of a 4 or more consecutive periods
+would be considered a part of an ellipses. I will assume this is a fringe case.
+The comments in this code represent the changes I would make if all ellipses
+in groups of 4 or more periods should be omitted.*/
+#include <fstream>
+#include <iostream>
+using namespace std;
+
+void periodCountEllipses()
+{
+    string fileName;
+    cout << "Please enter the file name: ";
+    cin >> fileName;
+    ifstream in(fileName);
+    while (in.fail())
+    {
+        cout << "The file failed to open." << endl;
+        cout << "Please enter the file name: ";
+        cin >> fileName;
+        in.clear();
+        in.open(fileName);
+    }
+    char c;
+    bool inEllipsis = false;
+    int periodCount = 0;
+    int count;
+    while (!in.fail())
+    {
+        c = in.get();
+        if (c == '.')
+        {
+            periodCount++;
+            if (!inEllipsis)
+                inEllipsis = true;
+            //This else if statement would be removed.
+            else if (periodCount == 3)
+            {
+                count++;
+                periodCount = 0;
+                inEllipsis = false;
+            }
+        }
+        else if(inEllipsis)
+        {
+            /*
+            if(count == 3)
+                count++;
+            */
+            inEllipsis = false;
+            periodCount = 0;
+        }
+    }
+    /*
+    if(inEllipsis && periodCount == 3)
+        count++;
+    */
+    cout << "The file contains " << count << " ellipses." << endl;
+}
+
+10.
+// Height and data value of nullptr is 0
+// Height of leaf node is 1
+bool BST::is_height_tree(BSTNode *root)
+{
+    int height = 0;
+    return is_height_tree(root, height);
+}
+bool BST::is_height_tree(BSTNode *n, int &height)
+{
+    if (n == nullptr)
+        return true;
+    else
+    {
+        int rHeight = height;
+        bool lResult = is_height_tree(n->left, height);
+        bool rResult = is_height_tree(n->right, rHeight);
+        if (height < rHeight)
+            height = rHeight;
+        bool nResult = ++height == n->data;
+        return lResult && rResult && nResult;
+    }
+}
+
+11. 
+#include <vector>
+using namespace std;
+
+void strangeSort(vector<int> &v)
+{
+    vector<int> evens;
+    evens.reserve(v.size());
+    vector<int> odds;
+    odds.reserve(v.size());
+    for (int i = 0; i < v.size(); i++)
+        if (v.at(i) % 2 == 0)
+            evens.push_back(v.at(i));
+        else
+            odds.push_back(v.at(i));
+    v.clear();
+    for (int i = 0; i < evens.size(); i++)
+        v.push_back(evens.at(i));
+    for (int i = odds.size() - 1; i >= 0; i--)
+        v.push_back(odds.at(i));
+}
+
+int main()
+{
+    vector<int> v1 = {1, 2, 3, 4};
+    vector<int> v2 = {3, 5, 7, 6, -2, 8};
+    vector<int> v3 = {7, 2, 3, 4, 9};
+    vector<int> v4 = {1, 7, 3, 4, 2, 8};
+    vector<int> v5 = {2, 4};
+    vector<int> v6 = {};
+    strangeSort(v1);
+    strangeSort(v2);
+    strangeSort(v3);
+    strangeSort(v4);
+    strangeSort(v5);
+    strangeSort(v6);
+    return 0;
+}
