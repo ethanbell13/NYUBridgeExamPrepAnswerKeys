@@ -1,0 +1,132 @@
+1. b //radix sort not currently covered in Bridge
+
+2. c 
+
+3. c 
+
+4. c
+
+5. d 
+
+6. 
+void vectorToBST(vector<int> &sorted, BST<int> &bst)
+{
+    vectorToBST(sorted, bst, 0, sorted.size() - 1);
+}
+void vectorToBST(vector<int> &sorted, BST<int> &bst, int low, int high)
+{
+    if(low == high)
+        bst.insert(sorted.at(low));
+    else if(low < high)
+    {
+        int mid = (high + low) / 2;
+        bst.insert(mid);
+        vectorToBST(sorted, bst, low, mid - 1);
+        vectorToBST(sorted, bst, mid + 1, high);
+    }
+}
+
+7. First I would create an ifstream variable called in and use it to open the
+file. Next, I would create an integer variable called num, an integer variable 
+called median, and an integer variable called count. Next, I would run through 
+this while loop "while(in >> num)." Within each iteration of the while loop, I 
+would increment count by 1. After the while loop has read the entire file, I 
+would close the file, clear the variable "in", and reopen the file with variabe 
+in. Next, I would create an integer variable called mid, set it to "count / 2",
+and create an integer called newCount and set it to 0. Next, I would run through
+this while loop again "while(in >> num)". In each iteration of the while loop, I
+will increment newCount by 1 and check if newCount is equal to mid. If newCount
+is equal to mid, I'll check if count is divisible by 2. If it is divisible by 2,
+I set median to the currrent value of num. Next, I'll call "in >> num" and add 
+num to median. Finally, I'll divide median by 2. This is the value of the median
+number in the file. If count is not divisible by 2, instead of the previous 
+steps, I'll execute the statement "in >> num" and then set median equal to num. 
+This will be the median value of the number. The final steps would be to break 
+out of the while loop and return median. This file will run in Theta(n) time 
+and use constant additional space.
+
+8. 
+void readInput(ifstream &in, multiset<int> &nums)
+{
+    int num;
+    while (in >> num)
+        nums.insert(num);
+}
+int findMedian(ifstream &in)
+{
+    multiset<int> nums;
+    readInput(in, nums);
+    int size = nums.size();
+    int mid = size / 2;
+    int count = 1;
+    int median = 0;
+    multiset<int>::iterator itr = nums.begin();
+    if (size == 1)
+        return *itr;
+    for (itr; itr != nums.end(); itr++)
+    {
+        if (count++ == mid)
+        {
+            if (size % 2 == 0)
+            {
+                multiset<int>::iterator previous = itr++;
+                median = (*itr + *previous) / 2;
+            }
+            else
+                median = *(++itr);
+        }
+    }
+    return median;
+}
+
+9. 
+template<class T>
+void LList<T>::push_back(T data)
+{
+    LListNode<T> *newNode = new LListNode<T>(data);
+    if(head == nullptr)
+    {
+        head = newNode;
+        head->next = head;
+    }
+    else
+    {
+        LListNode<T> *temp = head;
+        while(temp->next != head)
+            temp = temp->next;
+        temp->next = newNode;
+        newNode->next = head;
+    }
+}
+
+10. 
+class Package
+{
+    double weight;
+
+public:
+    Package(double weightIn) : weight(weightIn) {}
+    double getWeight() const { return weight; }
+    virtual double getEffectiveWeight() const = 0;
+};
+class Envelope : public Package
+{
+public:
+    Envelope(double weight) : Package(weight) {}
+    virtual double getEffectiveWeight() const { return getWeight(); }
+};
+class Box : public Package
+{
+    double cubicArea;
+
+public:
+    Box(double weight, double cubicAreaIn) : Package(weight), cubicArea(cubicAreaIn) {}
+    virtual double getEffectiveWeight() const;
+};
+
+double Box::getEffectiveWeight() const
+{
+    if (cubicArea < getWeight())
+        return getWeight();
+    return cubicArea;
+}
