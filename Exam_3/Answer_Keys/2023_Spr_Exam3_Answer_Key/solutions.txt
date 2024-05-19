@@ -1,0 +1,184 @@
+1. c
+
+2. d 
+
+3. b 
+
+4. ptr->head->data
+
+5. Copy constructor, assignment operator, and the 
+destructor.
+
+6. The push() method.
+void Stack<T>::push(T data);
+
+7. I would pass the root, the given value, and an empty vector of integers
+to this function 
+"void pushToVector(BSTNode<int>* n, vector<int> &v, int x)".
+pushToVector first checks if n is a nullptr. If it is, it exits the function
+call. Next it checks if n->data is greater than x. If it is, it pushes
+n->data to x. If n->left is not a nullptr and n->left->data is also greater than
+x, it calls itself passing n->left, v, and x as arguements. 
+If n->data is less than or equal to x, the function calls itself pushing 
+n->right, v, and x as arguements. This function runs in O(n) time and 
+has a space complexity of O(n). The space complexity can not be reduced, as
+the goal is to copy values from the tree onto a vector.
+
+8. 
+    a: a b c + * d -
+    b: a b + c d * +
+    c. a b c * d * -
+
+9. 
+/* I'm assuming that duplicate student names are
+not permitted and that the file contains no duplicates.
+Details were not given about the presence of last names
+or whether to sort by last name or first name. Therefore,
+I will sort based on the whole strings contained on the
+file lines*/
+#include <fstream>
+#include <string>
+#include <set>
+#include <iostream>
+using namespace std;
+
+const string FILE_NAME = "students.txt";
+
+void sortStudentNames(const string &fileName);
+
+int main()
+{
+    sortStudentNames(FILE_NAME);
+    return 0;
+}
+
+void sortStudentNames(const string &fileName)
+{
+    ifstream in(FILE_NAME);
+    if (in.fail())
+    {
+        cout << "File failed to open." << endl;
+        exit(1);
+    }
+    set<string> names;
+    string name;
+    while (!in.fail())
+    {
+        getline(in, name);
+        names.insert(name);
+    }
+    in.close();
+    ofstream out(FILE_NAME);
+    if (out.fail())
+    {
+        cout << "File failed to open." << endl;
+        exit(1);
+    }
+    for (set<string>::iterator itr = names.begin(); itr != names.end(); itr++)
+        out << *itr << '\n';
+    out.close();
+}
+
+10. 
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class Coffee
+{
+    int size;
+    bool cream;
+    bool sugar;
+
+public:
+    Coffee(int sizeIn, bool creamIn = false, bool sugarIn = false) : size(sizeIn), cream(creamIn), sugar(sugarIn) {}
+    int getSize() const { return size; }
+    bool getCream() const { return cream; }
+    bool getSugar() const { return sugar; }
+    void addCream() { cream = true; }
+    void addSugar() { sugar = true; }
+    virtual double cost() const = 0;
+};
+
+class IcedCoffee : public Coffee
+{
+    int ice;
+
+public:
+    IcedCoffee(int size, int iceIn = 5) : Coffee(size), ice(iceIn) {}
+    virtual double cost() const;
+};
+
+class HotCoffee : public Coffee
+{
+    double temp;
+
+public:
+    HotCoffee(int size, int tempIn = 195.5) : Coffee(size), temp(tempIn) {}
+    virtual double cost() const;
+};
+
+class Order
+{
+    vector<Coffee *> coffees;
+
+public:
+    void addCoffee(Coffee *c) { coffees.push_back(c); }
+    double cost() const;
+};
+
+double IcedCoffee::cost() const
+{
+    double cost = 3;
+    if (getSize() > 32)
+        cost += 1;
+    if (getCream())
+        cost += .5;
+    if (getSugar())
+        cost += .25;
+    if (ice > 5)
+        cost += .5;
+    return cost;
+}
+
+double HotCoffee::cost() const
+{
+    double cost = 2.5;
+    if (getSize() > 16)
+        cost += 1;
+    if (getCream())
+        cost += .25;
+    if (getSugar())
+        cost += .15;
+    if (temp > 210)
+        cost += .25;
+    return cost;
+}
+double Order::cost() const
+{
+    double cost = 0;
+    for (int i = 0; i < coffees.size(); i++)
+        cost += coffees.at(i)->cost();
+    return cost;
+}
+
+int main()
+{
+    Order newOrder;
+    HotCoffee h1(32, 190);
+    h1.addSugar();
+    HotCoffee h2(8, 215);
+    h2.addCream();
+    IcedCoffee i1(39, 7);
+    i1.addCream();
+    i1.addSugar();
+    cout << "h1 cost: " << h1.cost() << endl;
+    cout << "h2 cost: " << h2.cost() << endl;
+    cout << "i1 cost: " << i1.cost() << endl;
+    newOrder.addCoffee(&h1);
+    newOrder.addCoffee(&h2);
+    newOrder.addCoffee(&i1);
+    cout << "Order total: " << newOrder.cost() << endl;
+    return 0;
+}
