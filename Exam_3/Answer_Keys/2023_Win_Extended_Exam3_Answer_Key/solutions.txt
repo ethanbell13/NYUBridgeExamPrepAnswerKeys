@@ -1,0 +1,121 @@
+1. a 
+
+2. c
+
+3. c 
+
+4. 
+void func(int x) 
+{ /* Your code HERE! */ 
+    Base::func(x);
+}
+
+5. 
+string leftOrRight(bstNode<T> *n)
+{
+    if(n == nullptr || n->parent == nullptr)
+        return "Not a child";
+    else
+    {
+        if(n->data < n->parent->data)
+            return "left child";
+        return "right child";
+    }
+}
+
+6. I would create a multiset<int> variable called sortedTree. Next, I would 
+create a LListNode<int> variable called temp and set it to head. I would
+then pass through this loop "while(temp != nullptr). For each iteration
+of the while loop, I would insert the data value in temp into sortedTree 
+and then set temp to temp->next. After the while loop iterates through 
+the linked list, I would set temp to head and enter the following loop 
+"for(multiset<int>::iterator itr = sortedTree.begin(); itr != sortedTree.end(); itr++)".
+For each iteration of this loop, I would set the data value of temp equal to the
+data value of itr, and then set temp to temp->next. After iterating through the
+multiset, the linked list will be in sorted order. Insertion in a multiset 
+cost O(log(n)) time. This would happen n times in the first loop, so the
+first loop will contribute O(nlog(n)) to the runtime. The second loop only 
+contributes O(n) to the runtime. So the runtime is still O(nlog(n)).
+
+7. I would create a function with this prototype 
+"int isAvl(BSTNode<T> *n, bool &compliant)". This function first checks if 
+compliant is false. If it is, it returns 0. Next it checks if n is null. If it 
+is, it returns 0. Otherwise, it calls itself twice passing the left and right
+children and passing compliant in both calls. If the difference between the two 
+children is greater than 1, it sets compliant to false. Finally, it determines 
+which child has a greater height and returns that height plus 1. Outside of this
+function, I would create a bool variable called "result", set result to true,
+and perform this function call "isAvl(root, result). After this call to isAVl,
+result will accurately reflect whether or not the tree is AVL compliant.  
+The function isAvl is essentially the height funciton with some additional 
+constant work in each recursive call to determine AVL compliance. Its runtime 
+is Theta(N). 
+
+
+8.
+#include <fstream>
+#include <set>
+#include <string>
+#include <iostream>
+using namespace std;
+
+const string FILE_NAME = "input.txt";
+
+void readInput(const string &fileName, multiset<pair<int, string>> &lines);
+void writeOutput(const string &fileName, multiset<pair<int, string>> &lines);
+
+int main()
+{
+    multiset<pair<int, string>> lines;
+    readInput(FILE_NAME, lines);
+    writeOutput(FILE_NAME, lines);
+}
+
+void readInput(const string &fileName, multiset<pair<int, string>> &lines)
+{
+    int num;
+    string name;
+    ifstream in(fileName);
+    while (in >> num)
+    {
+        in >> name;
+        lines.insert({num, name});
+    }
+    in.close();
+}
+void writeOutput(const string &fileName, multiset<pair<int, string>> &lines)
+{
+    ofstream out(FILE_NAME);
+    for (multiset<pair<int, string>>::iterator itr = lines.begin(); itr != lines.end(); itr++)
+        out << itr->first << '\t' << itr->second << '\n';
+    out.close();
+}
+
+9. 
+bool compareDriver(LListNode<int> *&lln, BSTNode<int> *bstn);
+
+bool compare(LListNode<int> *lln, BSTNode<int> *bstn){ compareDriver(lln, bstn);}
+
+bool compareDriver(LListNode<int> *&lln, BSTNode<int> *bstn)
+{
+    if(lln == nullptr || bstn == nullptr)
+    {
+        if(lln != nullptr || bstn != nullptr)
+            return false;
+        else
+            return true;
+    }
+    else
+    {
+        bool left = true;
+        bool right = true;
+        if(bstn->left != nullptr)
+            left = compareDriver(lln, bstn->left);
+        bool mid = bstn->data == lln->data;
+        lln = lln->next;
+        if(bstn->right != nullptr)
+            right = compareDriver(lln, bstn->right);
+        return left && mid && right;
+    }
+}
+
