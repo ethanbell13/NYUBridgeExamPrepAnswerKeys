@@ -28,7 +28,7 @@ bool bussesTooClose(string busLine)
     for (int i = 1; i < distances.size(); i++)
         if (distances.at(i) - distances.at(i - 1) < 1)
             return true;
-    return true;
+    return false;
 }
 
 7. 
