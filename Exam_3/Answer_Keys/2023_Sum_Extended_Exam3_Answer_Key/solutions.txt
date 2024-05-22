@@ -1,7 +1,6 @@
 1. B
 
-2. A, D //Are we supposed to select multiple answers?
-        //Does tree make it too vague to be an optioin.
+2. D
 
 3. A
 
