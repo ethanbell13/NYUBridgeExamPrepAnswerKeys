@@ -131,3 +131,73 @@ void BST::checkTree(BSTNode *n, bool &correct)
     }    
 }
 
+
+11. (proposed by Agustin Leon, the main() is not required but nice for testing)
+
+class ExpressionTreeNode;
+
+class ExpressionTree {
+    public:
+        ExpressionTreeNode* root;
+        int size;
+};
+
+class ExpressionTreeNode {
+
+    public:
+        char data;
+        ExpressionTreeNode* parent;
+        ExpressionTreeNode* left;
+        ExpressionTreeNode* right;
+
+        ExpressionTreeNode(char new_data) : data(new_data), parent(nullptr), left(nullptr), right(nullptr) {}
+        virtual int calculateValue() =0;
+};
+
+class OperandNode : public ExpressionTreeNode {
+    public:
+        OperandNode(int new_data) : ExpressionTreeNode((char) new_data) {}
+        virtual int calculateValue() { return data; }
+};
+class OperatorNode : public ExpressionTreeNode {
+    public:
+        OperatorNode(char new_data) : ExpressionTreeNode( new_data) {}
+        virtual int calculateValue();        
+};
+
+int OperatorNode::calculateValue() { // We assume that nodes holding an operator can't be leaf nodes. We choose to perform substraction and division right to left, in order to avoid negatives and sub 1 results.
+    int result = 0;                  // We also assume that operator nodes always have two children
+    if (this->data == '+')           // If not, we'd have to take criteria regarding the different operators (such as division with one children being null).
+        result = this->right->calculateValue() + this->left->calculateValue();
+    else if (this->data == '-')
+        result = this->right->calculateValue() - this->left->calculateValue();
+    else if (this->data == '*')
+        result = this->right->calculateValue() * this->left->calculateValue();
+    else if (this->data == '/')
+        result = this->right->calculateValue() / this->left->calculateValue();
+    else
+        result = this->data;
+
+    return result;
+}
+
+int main () {
+
+    ExpressionTree tree;
+    OperatorNode operator1('*');
+    OperatorNode operator2('+');
+    OperandNode operand1(2);
+    OperandNode operand2(3);
+    OperandNode operand3(7);
+
+    tree.root = &operator1;
+    tree.root->left = &operator2;
+    tree.root->right = &operand3;
+
+    tree.root->left->left = &operand1;
+    tree.root->left->right = &operand2;
+
+    cout << tree.root->calculateValue() << endl;
+
+    return 0;
+}
